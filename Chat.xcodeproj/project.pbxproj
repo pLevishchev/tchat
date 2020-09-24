@@ -12,7 +12,6 @@
 		47214E312518EA0100BF43C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47214E302518EA0100BF43C4 /* Constants.swift */; };
 		47214E332519274600BF43C4 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47214E322519274600BF43C4 /* CustomButton.swift */; };
 		473E022625150E44002565FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E022525150E44002565FF /* AppDelegate.swift */; };
-		473E022825150E44002565FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E022725150E44002565FF /* SceneDelegate.swift */; };
 		473E022A25150E44002565FF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E022925150E44002565FF /* ProfileViewController.swift */; };
 		473E022D25150E44002565FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473E022B25150E44002565FF /* Main.storyboard */; };
 		473E022F25150E45002565FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473E022E25150E45002565FF /* Assets.xcassets */; };
@@ -29,7 +28,6 @@
 		47214E322519274600BF43C4 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		473E022225150E44002565FF /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		473E022525150E44002565FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		473E022725150E44002565FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		473E022925150E44002565FF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		473E022C25150E44002565FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		473E022E25150E45002565FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 				473E023C25188DEE002565FF /* Extensions */,
 				473E02392515122B002565FF /* Logger */,
 				473E022525150E44002565FF /* AppDelegate.swift */,
-				473E022725150E44002565FF /* SceneDelegate.swift */,
 				473E022B25150E44002565FF /* Main.storyboard */,
 				473E022E25150E45002565FF /* Assets.xcassets */,
 				473E023025150E45002565FF /* LaunchScreen.storyboard */,
@@ -214,7 +211,6 @@
 				47214E332519274600BF43C4 /* CustomButton.swift in Sources */,
 				473E022625150E44002565FF /* AppDelegate.swift in Sources */,
 				473E02412518BD03002565FF /* Logo.swift in Sources */,
-				473E022825150E44002565FF /* SceneDelegate.swift in Sources */,
 				47214E2C2518D4CB00BF43C4 /* User.swift in Sources */,
 				47214E312518EA0100BF43C4 /* Constants.swift in Sources */,
 			);
@@ -292,7 +288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -346,7 +342,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

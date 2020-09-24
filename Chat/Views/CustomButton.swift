@@ -14,7 +14,7 @@ class CustomButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        print("EditButton frame \(frame)")
+        print("EditButton frame \(self.frame)")
     }
     
     required init?(coder: NSCoder) {
@@ -23,7 +23,7 @@ class CustomButton: UIButton {
     
     func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemGray2
+        backgroundColor = .systemGray
         layer.cornerRadius = 10
         setTitle("Edit", for: .normal)
         setTitleColor(.black, for: .normal)

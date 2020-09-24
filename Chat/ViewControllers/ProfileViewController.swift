@@ -88,7 +88,7 @@ class ProfileViewController: UIViewController, ILogger {
     private func configureBioLabel() {
         let padding: CGFloat = 20
         bio.translatesAutoresizingMaskIntoConstraints = false
-        bio.textColor = .secondaryLabel
+        bio.textColor = .black
         bio.textAlignment = .center
         bio.numberOfLines = 3
         bio.text = user.bio
@@ -111,7 +111,7 @@ class ProfileViewController: UIViewController, ILogger {
     }
     
     private func setUpUI() {
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         view.addSubviews(logo, name, bio, editButton)
         configureLogo()
         configureNameLabel()
