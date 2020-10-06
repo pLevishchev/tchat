@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4712EB79252CB595000661CB /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712EB78252CB595000661CB /* Formatter.swift */; };
+		4712EB7B252CC1C9000661CB /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712EB7A252CC1C9000661CB /* Date+Ext.swift */; };
 		47214E2C2518D4CB00BF43C4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47214E2B2518D4CB00BF43C4 /* User.swift */; };
 		47214E2E2518DF3C00BF43C4 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47214E2D2518DF3C00BF43C4 /* CameraHandler.swift */; };
 		47214E312518EA0100BF43C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47214E302518EA0100BF43C4 /* Constants.swift */; };
@@ -19,9 +21,15 @@
 		473E023B25151242002565FF /* ILogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E023A25151242002565FF /* ILogger.swift */; };
 		473E023E25188E0E002565FF /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E023D25188E0E002565FF /* UIView+Ext.swift */; };
 		473E02412518BD03002565FF /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E02402518BD02002565FF /* Logo.swift */; };
+		4773EF18251F7BA6006CEBC3 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF17251F7BA6006CEBC3 /* ConversationsListViewController.swift */; };
+		4773EF1D251F9733006CEBC3 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF1B251F9733006CEBC3 /* ConversationCell.swift */; };
+		4773EF1E251F9733006CEBC3 /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4773EF1C251F9733006CEBC3 /* ConversationCell.xib */; };
+		4773EF20251F9F38006CEBC3 /* ConversationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF1F251F9F38006CEBC3 /* ConversationCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4712EB78252CB595000661CB /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		4712EB7A252CC1C9000661CB /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		47214E2B2518D4CB00BF43C4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		47214E2D2518DF3C00BF43C4 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 		47214E302518EA0100BF43C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -36,6 +44,10 @@
 		473E023A25151242002565FF /* ILogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILogger.swift; sourceTree = "<group>"; };
 		473E023D25188E0E002565FF /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		473E02402518BD02002565FF /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
+		4773EF17251F7BA6006CEBC3 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
+		4773EF1B251F9733006CEBC3 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
+		4773EF1C251F9733006CEBC3 /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
+		4773EF1F251F9F38006CEBC3 /* ConversationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				47214E2B2518D4CB00BF43C4 /* User.swift */,
+				4773EF1F251F9F38006CEBC3 /* ConversationCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -61,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				47214E302518EA0100BF43C4 /* Constants.swift */,
+				4712EB78252CB595000661CB /* Formatter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -111,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				473E023D25188E0E002565FF /* UIView+Ext.swift */,
+				4712EB7A252CC1C9000661CB /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -118,6 +133,7 @@
 		473E023F2518BCE0002565FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				47E0CB58252CB16700DB09F3 /* Cells */,
 				473E02402518BD02002565FF /* Logo.swift */,
 				47214E322519274600BF43C4 /* CustomButton.swift */,
 			);
@@ -129,8 +145,18 @@
 			children = (
 				47214E2D2518DF3C00BF43C4 /* CameraHandler.swift */,
 				473E022925150E44002565FF /* ProfileViewController.swift */,
+				4773EF17251F7BA6006CEBC3 /* ConversationsListViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		47E0CB58252CB16700DB09F3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4773EF1B251F9733006CEBC3 /* ConversationCell.swift */,
+				4773EF1C251F9733006CEBC3 /* ConversationCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4773EF1E251F9733006CEBC3 /* ConversationCell.xib in Resources */,
 				473E023225150E45002565FF /* LaunchScreen.storyboard in Resources */,
 				473E022F25150E45002565FF /* Assets.xcassets in Resources */,
 				473E022D25150E44002565FF /* Main.storyboard in Resources */,
@@ -204,7 +231,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4773EF20251F9F38006CEBC3 /* ConversationCellModel.swift in Sources */,
+				4712EB79252CB595000661CB /* Formatter.swift in Sources */,
 				473E022A25150E44002565FF /* ProfileViewController.swift in Sources */,
+				4773EF1D251F9733006CEBC3 /* ConversationCell.swift in Sources */,
+				4773EF18251F7BA6006CEBC3 /* ConversationsListViewController.swift in Sources */,
+				4712EB7B252CC1C9000661CB /* Date+Ext.swift in Sources */,
 				47214E2E2518DF3C00BF43C4 /* CameraHandler.swift in Sources */,
 				473E023B25151242002565FF /* ILogger.swift in Sources */,
 				473E023E25188E0E002565FF /* UIView+Ext.swift in Sources */,
