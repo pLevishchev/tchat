@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController, ILogger {
     private let name = UILabel()
     private let bio = UILabel()
     private let editButton = CustomButton()
+    private let navBar = UINavigationBar()
     
     private var user = User(firstName: "Павел",
                             lastName: "Левищев",
@@ -58,10 +59,20 @@ class ProfileViewController: UIViewController, ILogger {
         log()
     }
     
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func configNavBar() {
+        navBar.translatesAutoresizingMaskIntoConstraints = false
+        navigationItem.title = "My Profile"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissVC))
+    }
+    
     private func configureLogo() {
         NSLayoutConstraint.activate([
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logo.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
+            logo.topAnchor.constraint(equalTo: navBar.bottomAnchor, constant: 60),
         ])
     
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar))
@@ -112,11 +123,12 @@ class ProfileViewController: UIViewController, ILogger {
     
     private func setUpUI() {
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        view.addSubviews(logo, name, bio, editButton)
+        view.addSubviews(navBar, logo, name, bio, editButton)
         configureLogo()
         configureNameLabel()
         configureBioLabel()
         configureEditButton()
+        configNavBar()
     }
     
     @objc func addAvatar() {

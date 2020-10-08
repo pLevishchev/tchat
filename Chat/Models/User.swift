@@ -20,14 +20,22 @@ struct User {
     }
     
     func firstLetters() -> String {
+        return firstLetterName() + firstLetterLastName()
+    }
+    
+    private func firstLetterName() -> String {
         guard let firstLetter = firstName.first else {
             return ""
         }
         
+        return String(firstLetter)
+    }
+    
+    private func firstLetterLastName() -> String {
         guard let secondLetter = lastName.first else {
             return ""
         }
         
-        return String(firstLetter) + String(secondLetter)
+        return String(secondLetter)
     }
 }
