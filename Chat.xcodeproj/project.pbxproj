@@ -12,6 +12,10 @@
 		3CBC7AA4252DDF28000BBD80 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC7AA2252DDF28000BBD80 /* MessageCell.swift */; };
 		3CBC7AA5252DDF28000BBD80 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CBC7AA3252DDF28000BBD80 /* MessageCell.xib */; };
 		3CBC7AA9252DE1AA000BBD80 /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC7AA8252DE1AA000BBD80 /* ConfigurableView.swift */; };
+		3CEAD1A3253094D900F3D10C /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEAD1A2253094D900F3D10C /* ThemesViewController.swift */; };
+		3CEAD1AD2530987900F3D10C /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEAD1AB2530987900F3D10C /* ThemeCell.swift */; };
+		3CEAD1AE2530987900F3D10C /* ThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CEAD1AC2530987900F3D10C /* ThemeCell.xib */; };
+		3CEAD1B125309C1700F3D10C /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEAD1B025309C1700F3D10C /* ThemeModel.swift */; };
 		4712EB79252CB595000661CB /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712EB78252CB595000661CB /* Formatter.swift */; };
 		4712EB7B252CC1C9000661CB /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712EB7A252CC1C9000661CB /* Date+Ext.swift */; };
 		47214E2C2518D4CB00BF43C4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47214E2B2518D4CB00BF43C4 /* User.swift */; };
@@ -38,6 +42,10 @@
 		3CBC7AA2252DDF28000BBD80 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3CBC7AA3252DDF28000BBD80 /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		3CBC7AA8252DE1AA000BBD80 /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
+		3CEAD1A2253094D900F3D10C /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
+		3CEAD1AB2530987900F3D10C /* ThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
+		3CEAD1AC2530987900F3D10C /* ThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeCell.xib; sourceTree = "<group>"; };
+		3CEAD1B025309C1700F3D10C /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		4712EB78252CB595000661CB /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		4712EB7A252CC1C9000661CB /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		47214E2B2518D4CB00BF43C4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -85,6 +93,7 @@
 				47214E2B2518D4CB00BF43C4 /* User.swift */,
 				4773EF1F251F9F38006CEBC3 /* ConversationCellModel.swift */,
 				3CBC7A9C252D8C3D000BBD80 /* MessageCellModel.swift */,
+				3CEAD1B025309C1700F3D10C /* ThemeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +176,7 @@
 				473E022925150E44002565FF /* ProfileViewController.swift */,
 				4773EF17251F7BA6006CEBC3 /* ConversationsListViewController.swift */,
 				3CBC7A99252CE0D5000BBD80 /* ConversationViewController.swift */,
+				3CEAD1A2253094D900F3D10C /* ThemesViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -178,6 +188,8 @@
 				4773EF1C251F9733006CEBC3 /* ConversationCell.xib */,
 				3CBC7AA2252DDF28000BBD80 /* MessageCell.swift */,
 				3CBC7AA3252DDF28000BBD80 /* MessageCell.xib */,
+				3CEAD1AB2530987900F3D10C /* ThemeCell.swift */,
+				3CEAD1AC2530987900F3D10C /* ThemeCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -241,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4773EF1E251F9733006CEBC3 /* ConversationCell.xib in Resources */,
+				3CEAD1AE2530987900F3D10C /* ThemeCell.xib in Resources */,
 				3CBC7AA5252DDF28000BBD80 /* MessageCell.xib in Resources */,
 				473E023225150E45002565FF /* LaunchScreen.storyboard in Resources */,
 				473E022F25150E45002565FF /* Assets.xcassets in Resources */,
@@ -255,7 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CEAD1B125309C1700F3D10C /* ThemeModel.swift in Sources */,
 				3CBC7AA4252DDF28000BBD80 /* MessageCell.swift in Sources */,
+				3CEAD1AD2530987900F3D10C /* ThemeCell.swift in Sources */,
 				4773EF20251F9F38006CEBC3 /* ConversationCellModel.swift in Sources */,
 				4712EB79252CB595000661CB /* Formatter.swift in Sources */,
 				3CBC7AA9252DE1AA000BBD80 /* ConfigurableView.swift in Sources */,
@@ -269,6 +284,7 @@
 				473E023B25151242002565FF /* ILogger.swift in Sources */,
 				473E023E25188E0E002565FF /* UIView+Ext.swift in Sources */,
 				47214E332519274600BF43C4 /* CustomButton.swift in Sources */,
+				3CEAD1A3253094D900F3D10C /* ThemesViewController.swift in Sources */,
 				473E022625150E44002565FF /* AppDelegate.swift in Sources */,
 				473E02412518BD03002565FF /* Logo.swift in Sources */,
 				47214E2C2518D4CB00BF43C4 /* User.swift in Sources */,

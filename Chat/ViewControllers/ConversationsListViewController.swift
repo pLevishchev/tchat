@@ -46,6 +46,7 @@ class ConversationsListViewController: UIViewController {
         
         let button = UIButton()
         imageView.addSubview(button)
+        button.addTarget(self, action:#selector(openSettings), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -71,6 +72,12 @@ class ConversationsListViewController: UIViewController {
         let navController = UINavigationController(rootViewController: profileVC)
         
         present(navController, animated:true, completion: nil)
+    }
+    
+    @objc func openSettings() {
+        
+        let settingsVC = ThemesViewController()
+        self.navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     @objc func dissmissVC() {
