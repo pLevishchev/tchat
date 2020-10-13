@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C6E034B2530E22500F3DA56 /* ThemesPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E034A2530E22500F3DA56 /* ThemesPickerDelegate.swift */; };
+		3C6E03542534E28B00F3DA56 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E03532534E28B00F3DA56 /* ThemeService.swift */; };
 		3CBC7A9A252CE0D5000BBD80 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC7A99252CE0D5000BBD80 /* ConversationViewController.swift */; };
 		3CBC7A9D252D8C3D000BBD80 /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC7A9C252D8C3D000BBD80 /* MessageCellModel.swift */; };
 		3CBC7AA4252DDF28000BBD80 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC7AA2252DDF28000BBD80 /* MessageCell.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C6E034A2530E22500F3DA56 /* ThemesPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesPickerDelegate.swift; sourceTree = "<group>"; };
+		3C6E03532534E28B00F3DA56 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		3CBC7A99252CE0D5000BBD80 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		3CBC7A9C252D8C3D000BBD80 /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		3CBC7AA2252DDF28000BBD80 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -79,10 +83,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C6E03522534E27100F3DA56 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3C6E03532534E28B00F3DA56 /* ThemeService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		3CBC7AA7252DE189000BBD80 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				3CBC7AA8252DE1AA000BBD80 /* ConfigurableView.swift */,
+				3C6E034A2530E22500F3DA56 /* ThemesPickerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -126,6 +139,7 @@
 		473E022425150E44002565FF /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				3C6E03522534E27100F3DA56 /* Services */,
 				3CBC7AA7252DE189000BBD80 /* Protocols */,
 				47214E2F2518E9E100BF43C4 /* Utilities */,
 				47214E2A2518D4BE00BF43C4 /* Models */,
@@ -274,8 +288,10 @@
 				4773EF20251F9F38006CEBC3 /* ConversationCellModel.swift in Sources */,
 				4712EB79252CB595000661CB /* Formatter.swift in Sources */,
 				3CBC7AA9252DE1AA000BBD80 /* ConfigurableView.swift in Sources */,
+				3C6E03542534E28B00F3DA56 /* ThemeService.swift in Sources */,
 				3CBC7A9A252CE0D5000BBD80 /* ConversationViewController.swift in Sources */,
 				473E022A25150E44002565FF /* ProfileViewController.swift in Sources */,
+				3C6E034B2530E22500F3DA56 /* ThemesPickerDelegate.swift in Sources */,
 				4773EF1D251F9733006CEBC3 /* ConversationCell.swift in Sources */,
 				4773EF18251F7BA6006CEBC3 /* ConversationsListViewController.swift in Sources */,
 				4712EB7B252CC1C9000661CB /* Date+Ext.swift in Sources */,

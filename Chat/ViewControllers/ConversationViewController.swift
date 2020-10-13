@@ -9,7 +9,11 @@
 import UIKit
 
 class ConversationViewController: UIViewController {
-    
+        
+    var currentTheme: ThemeModel {
+        ThemeService.shared.currentTheme()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
@@ -71,6 +75,13 @@ extension ConversationViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.configure(with: messages[indexPath.row])
+        cell.leftLabel.backgroundColor = currentTheme.leftColor
+        cell.rightLabel.backgroundColor = currentTheme.rightColor
+        
+        cell.leftLabel.textColor = currentTheme.fontColor
+        cell.rightLabel.textColor = currentTheme.fontColor
+        
+        cell.backgroundColor = currentTheme.backgroundColor
         
         return cell
     }

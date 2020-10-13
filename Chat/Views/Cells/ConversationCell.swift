@@ -15,6 +15,7 @@ class ConversationCell: UITableViewCell, ConfigurableView {
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var date: UILabel!
+    var cellBackgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
     override func awakeFromNib() {
         super.awakeFromNib()

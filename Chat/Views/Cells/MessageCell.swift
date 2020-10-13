@@ -32,6 +32,12 @@ class MessageCell: UITableViewCell, ConfigurableView {
         
         leftLabel.lineBreakMode = .byWordWrapping
         rightLabel.lineBreakMode = .byWordWrapping
+        
+        leftLabel.layer.masksToBounds = true
+        rightLabel.layer.masksToBounds = true
+        
+        leftLabel.layer.cornerRadius = 10
+        rightLabel.layer.cornerRadius = 10
 
         
         if model.isMyMessage {

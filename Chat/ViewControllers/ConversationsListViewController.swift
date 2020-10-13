@@ -9,13 +9,18 @@
 import UIKit
 
 class ConversationsListViewController: UIViewController {
-    
+    var currentTheme: ThemeModel {
+        ThemeService.shared.currentTheme()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
         // Do any additional setup after loading the view.
         view.addSubview(tableView)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     private lazy var tableView: UITableView = {
@@ -75,7 +80,6 @@ class ConversationsListViewController: UIViewController {
     }
     
     @objc func openSettings() {
-        
         let settingsVC = ThemesViewController()
         self.navigationController?.pushViewController(settingsVC, animated: true)
     }
