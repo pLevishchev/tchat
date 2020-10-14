@@ -10,16 +10,21 @@ import UIKit
 
 class ConversationsListViewController: UIViewController {
     var currentTheme: ThemeModel {
-        ThemeService.shared.currentTheme()
+        ThemeManager.shared.currentTheme()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
         // Do any additional setup after loading the view.
         view.addSubview(tableView)
+        //        UINavigationBar.appearance().barTintColor = ThemeService.shared.currentTheme().backgroundColor
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = currentTheme.backgroundColor
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: currentTheme.fontColor]
         tableView.reloadData()
     }
     
@@ -37,10 +42,8 @@ class ConversationsListViewController: UIViewController {
     
     private func configureNavBar() {
         navigationItem.title = "Chat"
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarButton())
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton())
-
     }
     
     private func leftBarButton() -> UIView {

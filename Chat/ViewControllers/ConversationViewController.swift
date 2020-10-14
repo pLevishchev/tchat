@@ -11,12 +11,13 @@ import UIKit
 class ConversationViewController: UIViewController {
         
     var currentTheme: ThemeModel {
-        ThemeService.shared.currentTheme()
+        ThemeManager.shared.currentTheme()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
+        tableView.backgroundColor = currentTheme.backgroundColor
     }
     
     private lazy var tableView: UITableView = {

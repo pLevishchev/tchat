@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ILogger {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        
+        UINavigationBar.appearance().barTintColor = ThemeManager.shared.currentTheme().backgroundColor
+
         if let window = window {
             let viewController = ConversationsListViewController()
-            
             window.rootViewController = UINavigationController(rootViewController: viewController)
             window.makeKeyAndVisible()
         }

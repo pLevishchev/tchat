@@ -13,6 +13,10 @@ class ThemesViewController: UIViewController {
     private var color = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
     private lazy var heightForHeader = view.frame.height / 10
     
+    var currentTheme: ThemeModel {
+        ThemeManager.shared.currentTheme()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
@@ -34,7 +38,7 @@ class ThemesViewController: UIViewController {
     
     private let cellID = String(describing: ThemeCell.self)
     
-    let themes = [ThemeService.shared.classic, ThemeService.shared.day, ThemeService.shared.night]
+    let themes = [ThemeManager.shared.classic, ThemeManager.shared.day, ThemeManager.shared.night]
 }
 
 extension ThemesViewController: UITableViewDataSource {
@@ -64,7 +68,10 @@ extension ThemesViewController: UITableViewDataSource {
             cell.backgroundColor = color
         }
 //        ThemeService.shared.didSelectTheme(theme: themes[indexPath.row])
-        ThemeService.shared.callback?(themes[indexPath.row])
+        ThemeManager.shared.callback?(themes[indexPath.row])
+        ThemeManager.shared.saveTheme(theme: themes[indexPath.row])
+        navigationController?.navigationBar.barTintColor = currentTheme.backgroundColor
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: currentTheme.fontColor]
     }
 }
 

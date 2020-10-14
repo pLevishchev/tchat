@@ -12,8 +12,8 @@ class MessageCell: UITableViewCell, ConfigurableView {
 
     typealias ConfigurationModel = MessageCellModel
     
-    @IBOutlet weak var leftLabel: UILabel!
-    @IBOutlet weak var rightLabel: UILabel!
+    @IBOutlet weak var leftLabel: PaddingLabel!
+    @IBOutlet weak var rightLabel: PaddingLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +30,9 @@ class MessageCell: UITableViewCell, ConfigurableView {
         leftLabel.numberOfLines = 0
         rightLabel.numberOfLines = 0
         
+        leftLabel.sizeToFit()
+        rightLabel.sizeToFit()
+        
         leftLabel.lineBreakMode = .byWordWrapping
         rightLabel.lineBreakMode = .byWordWrapping
         
@@ -38,8 +41,10 @@ class MessageCell: UITableViewCell, ConfigurableView {
         
         leftLabel.layer.cornerRadius = 10
         rightLabel.layer.cornerRadius = 10
-
         
+        leftLabel.padding(5, 5, 10, 8)
+        rightLabel.padding(5, 5, 10, 8)
+
         if model.isMyMessage {
             leftLabel.isHidden = true
             rightLabel.isHidden = false
