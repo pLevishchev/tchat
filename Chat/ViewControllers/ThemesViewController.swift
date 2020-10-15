@@ -67,7 +67,7 @@ extension ThemesViewController: UITableViewDataSource {
         tableView.visibleCells.forEach { cell in
             cell.backgroundColor = color
         }
-//        ThemeService.shared.didSelectTheme(theme: themes[indexPath.row])
+//        ThemeManager.shared.didSelectTheme(theme: themes[indexPath.row])
         ThemeManager.shared.callback?(themes[indexPath.row])
         ThemeManager.shared.saveTheme(theme: themes[indexPath.row])
         navigationController?.navigationBar.barTintColor = currentTheme.backgroundColor
