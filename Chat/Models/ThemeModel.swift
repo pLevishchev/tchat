@@ -6,7 +6,6 @@
 //  Copyright © 2020 p.levishchev. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct ThemeModel {

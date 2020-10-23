@@ -11,11 +11,14 @@ import UIKit
 class ConversationCell: UITableViewCell, ConfigurableView {
     typealias ConfigurationModel = ConversationCellModel
     
+    var currentTheme: ThemeModel {
+        ThemeManager.shared.currentTheme()
+    }
+    
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var date: UILabel!
-    var cellBackgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,10 +54,9 @@ class ConversationCell: UITableViewCell, ConfigurableView {
         }
         
         if model.isOnline {
-            backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+            backgroundColor = currentTheme.onlineColor
         } else {
-            backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            backgroundColor = currentTheme.offlineColor
         }
-        
     }
 }

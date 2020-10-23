@@ -12,6 +12,7 @@ class ConversationsListViewController: UIViewController {
     var currentTheme: ThemeModel {
         ThemeManager.shared.currentTheme()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()

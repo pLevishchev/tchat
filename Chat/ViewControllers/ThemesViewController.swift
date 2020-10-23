@@ -30,7 +30,7 @@ class ThemesViewController: UIViewController {
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
-        tableView.backgroundColor = color
+        tableView.backgroundColor = currentTheme.backgroundColor
         tableView.alwaysBounceVertical = false
         
         return tableView
@@ -51,7 +51,7 @@ extension ThemesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.configure(with: themes[indexPath.row])
-        cell.backgroundColor = color
+        cell.backgroundColor = currentTheme.backgroundColor
         cell.selectionStyle = .none
         
         return cell

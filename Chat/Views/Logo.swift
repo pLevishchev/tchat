@@ -22,11 +22,6 @@ class Logo: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(title: String) {
-        self.init(frame: .zero)
-        logoName.text = title
-    }
-    
     func configure() {
         addSubviews(avatar, logoName)
         configView()
