@@ -108,7 +108,7 @@ class ProfileViewController: UIViewController, ILogger {
         operationButton.backgroundColor = .white
     }
     
-    private func saveData(user: UserModel) {
+    private func saveData(user: UserModel, executor: SaveDataProtocol) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
@@ -117,7 +117,7 @@ class ProfileViewController: UIViewController, ILogger {
         operationButton.isEnabled = false
         operationButton.backgroundColor = .systemGray
         
-        GCDDataManager().writeDataToFile(user: user, viewController: self) {
+        executor.saveUser(user: user, viewController: self) {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             self.name.isEnabled = false
@@ -129,32 +129,6 @@ class ProfileViewController: UIViewController, ILogger {
             self.presentAlertOnMainThread(title: "Данные сохранены", message: nil, type: .ok)
         }
     }
-    
-    private func saveDataByOp(user: UserModel) {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        
-        gcdButton.isEnabled = false
-        gcdButton.backgroundColor = .systemGray
-        operationButton.isEnabled = false
-        operationButton.backgroundColor = .systemGray
-        
-        let operation = OperationDataManager(user: user, viewController: self)
-        let opQueue = OperationQueue()
-        OperationQueue.main.addOperation {
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.removeFromSuperview()
-            self.name.isEnabled = false
-            self.bio.isEditable = false
-            self.gcdButton.isEnabled = false
-            self.gcdButton.backgroundColor = .systemGray
-            self.operationButton.isEnabled = false
-            self.operationButton.backgroundColor = .systemGray
-            self.presentAlertOnMainThread(title: "Данные сохранены", message: nil, type: .ok)
-        }
-        opQueue.addOperation(operation)
-    }
-    
     
     private func configureBioLabel() {
         let size: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 80 : 200
@@ -166,7 +140,7 @@ class ProfileViewController: UIViewController, ILogger {
         bio.font = UIFont.systemFont(ofSize: 20)
         bio.textAlignment = .center
         bio.text = FileWriterService().readFile(viewController: self)?.bio ?? "\(user.bio)"
-
+        
         NSLayoutConstraint.activate([
             bio.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 32),
             bio.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -210,12 +184,13 @@ class ProfileViewController: UIViewController, ILogger {
     
     @objc func saveDataByGCD() {
         switchOffBorders()
-        saveData(user: fillModelCurrentData())
+        saveData(user: fillModelCurrentData(), executor: GCDDataManager())
     }
     
     @objc func saveDataByOperation() {
         switchOffBorders()
-        saveDataByOp(user: fillModelCurrentData())
+        let user = fillModelCurrentData()
+        saveData(user: user, executor: OperationDataManager(user: user, viewController: self))
     }
     
     private func switchOffBorders() {
@@ -267,7 +242,7 @@ extension ProfileViewController: UITextFieldDelegate {
 }
 
 extension ProfileViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
+    func textViewDidChange(_ textView: UITextView) { 
         changeButtons()
     }
 }

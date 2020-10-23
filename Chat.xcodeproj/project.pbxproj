@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C45DE292540C55200A62C35 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45DE282540C55200A62C35 /* UIViewController+Ext.swift */; };
-		3C45DE342542023D00A62C35 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3C45DE332542023D00A62C35 /* data.txt */; };
+		3C45DE3A2543305B00A62C35 /* SaveDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45DE392543305B00A62C35 /* SaveDataProtocol.swift */; };
 		3C6E034B2530E22500F3DA56 /* ThemesPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E034A2530E22500F3DA56 /* ThemesPickerDelegate.swift */; };
 		3C6E03542534E28B00F3DA56 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E03532534E28B00F3DA56 /* ThemeManager.swift */; };
 		3C6E0358253623EE00F3DA56 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E0357253623EE00F3DA56 /* PaddingLabel.swift */; };
@@ -47,7 +47,7 @@
 
 /* Begin PBXFileReference section */
 		3C45DE282540C55200A62C35 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
-		3C45DE332542023D00A62C35 /* data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
+		3C45DE392543305B00A62C35 /* SaveDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDataProtocol.swift; sourceTree = "<group>"; };
 		3C6E034A2530E22500F3DA56 /* ThemesPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesPickerDelegate.swift; sourceTree = "<group>"; };
 		3C6E03532534E28B00F3DA56 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		3C6E0357253623EE00F3DA56 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -113,6 +113,7 @@
 			children = (
 				3CBC7AA8252DE1AA000BBD80 /* ConfigurableView.swift */,
 				3C6E034A2530E22500F3DA56 /* ThemesPickerDelegate.swift */,
+				3C45DE392543305B00A62C35 /* SaveDataProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -167,7 +168,6 @@
 				473E022525150E44002565FF /* AppDelegate.swift */,
 				473E022B25150E44002565FF /* Main.storyboard */,
 				473E022E25150E45002565FF /* Assets.xcassets */,
-				3C45DE332542023D00A62C35 /* data.txt */,
 				473E023025150E45002565FF /* LaunchScreen.storyboard */,
 				473E023325150E45002565FF /* Info.plist */,
 			);
@@ -291,7 +291,6 @@
 				3CEAD1AE2530987900F3D10C /* ThemeCell.xib in Resources */,
 				3CBC7AA5252DDF28000BBD80 /* MessageCell.xib in Resources */,
 				473E023225150E45002565FF /* LaunchScreen.storyboard in Resources */,
-				3C45DE342542023D00A62C35 /* data.txt in Resources */,
 				473E022F25150E45002565FF /* Assets.xcassets in Resources */,
 				473E022D25150E44002565FF /* Main.storyboard in Resources */,
 			);
@@ -324,6 +323,7 @@
 				3CBC7A9D252D8C3D000BBD80 /* MessageCellModel.swift in Sources */,
 				47214E2E2518DF3C00BF43C4 /* CameraHandler.swift in Sources */,
 				473E023B25151242002565FF /* ILogger.swift in Sources */,
+				3C45DE3A2543305B00A62C35 /* SaveDataProtocol.swift in Sources */,
 				473E023E25188E0E002565FF /* UIView+Ext.swift in Sources */,
 				3C6E0360253CDB9600F3DA56 /* GCDDataManager.swift in Sources */,
 				3C6E035B2536D4FA00F3DA56 /* UserDefaults+Ext.swift in Sources */,

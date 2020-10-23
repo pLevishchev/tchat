@@ -12,7 +12,8 @@ import UIKit
 class FileWriterService {
     
     lazy var fileManager = FileManager.default
-    
+//    guard let path = Bundle.main.path(forResource: fileName, ofType: "txt") else { return }
+
     var fileName: URL {
         fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("name.txt")
     }
@@ -43,15 +44,13 @@ class FileWriterService {
     }
     
     func readFile(viewController: UIViewController) -> UserModel? {
-        if fileManager.fileExists(atPath: fileName.path),
-           fileManager.fileExists(atPath: fileBio.path),
+        if fileManager.fileExists(atPath: fileName.path) ||
+           fileManager.fileExists(atPath: fileBio.path) ||
            fileManager.fileExists(atPath: photoFile.path) {
             do {
-                
                 let name = try String(contentsOf: fileName, encoding: .utf8)
                 let bio = try String(contentsOf: fileBio, encoding: .utf8)
                 let photo = (try? Data(contentsOf: photoFile)) ?? Data()
-                
                 
                 return UserModel(name: name, bio: bio, photo: UIImage(data: photo))
             }

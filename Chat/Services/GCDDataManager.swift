@@ -12,18 +12,26 @@ import UIKit
 class GCDDataManager {
     let queue = DispatchQueue.global(qos: .utility)
     
-    func writeDataToFile(user: UserModel, viewController: UIViewController, closure: @escaping () -> Void) {
+    func saveTheme(closure: @escaping () -> Void) {
         queue.async {
-            FileWriterService().writeToFile(user: user, viewController: viewController)
-            DispatchQueue.main.async {
-                closure()
-            }
+           closure()
         }
     }
     
     func readDataFromFile(viewController: UIViewController, closure: @escaping () -> Void) {
         queue.async {
-//            FileWriterService().readFile(get: type, viewController: viewController)
+            FileWriterService().readFile(viewController: viewController)
+            DispatchQueue.main.async {
+                closure()
+            }
+        }
+    }
+}
+
+extension GCDDataManager: SaveDataProtocol {
+    func saveUser(user: UserModel, viewController: UIViewController, closure: @escaping () -> Void) {
+        queue.async {
+            FileWriterService().writeToFile(user: user, viewController: viewController)
             DispatchQueue.main.async {
                 closure()
             }

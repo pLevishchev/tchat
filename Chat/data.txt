@@ -1,7 +1,0 @@
-/* 
-  data.txr.strings
-  Chat
-
-  Created by Павел Левищев on 22.10.2020.
-  Copyright © 2020 p.levishchev. All rights reserved.
-*/
