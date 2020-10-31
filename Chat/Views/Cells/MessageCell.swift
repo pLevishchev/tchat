@@ -9,53 +9,34 @@
 import UIKit
 
 class MessageCell: UITableViewCell, ConfigurableView {
-
-    typealias ConfigurationModel = MessageCellModel
+    typealias ConfigurationModel = Message
     
-    @IBOutlet weak var leftLabel: PaddingLabel!
-    @IBOutlet weak var rightLabel: PaddingLabel!
-
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var message: PaddingLabel!
+    @IBOutlet weak var date: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func configure(with model: MessageCellModel) {
-        leftLabel.numberOfLines = 0
-        rightLabel.numberOfLines = 0
-        
-        leftLabel.sizeToFit()
-        rightLabel.sizeToFit()
-        
-        leftLabel.lineBreakMode = .byWordWrapping
-        rightLabel.lineBreakMode = .byWordWrapping
-        
-        leftLabel.layer.masksToBounds = true
-        rightLabel.layer.masksToBounds = true
-        
-        leftLabel.layer.cornerRadius = 10
-        rightLabel.layer.cornerRadius = 10
-        
-        leftLabel.padding(5, 5, 10, 8)
-        rightLabel.padding(5, 5, 10, 8)
-
-        if model.isMyMessage {
-            leftLabel.isHidden = true
-            rightLabel.isHidden = false
-            
-            rightLabel.text = model.text
+    func configure(with model: ConfigurationModel) {
+        if model.senderId == Generator().uuid() {
+            name.text = "It's me"
         } else {
-            leftLabel.isHidden = false
-            rightLabel.isHidden = true
-            
-            leftLabel.text = model.text
+            name.text = model.senderName
         }
+        message.text = model.content
+        date.text = Formatter.getTime(from: model.created)
+
+        message.numberOfLines = 0
+        message.sizeToFit()
+        message.lineBreakMode = .byWordWrapping
+        message.layer.masksToBounds = true
+        message.layer.cornerRadius = 10
+        message.padding(5, 5, 10, 8)
     }
-    
 }

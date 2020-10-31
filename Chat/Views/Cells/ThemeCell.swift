@@ -18,7 +18,6 @@ class ThemeCell: UITableViewCell, ConfigurableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,7 +44,6 @@ class ThemeCell: UITableViewCell, ConfigurableView {
         
         newBackgroundColor.backgroundColor = model.backgroundColor
         leftLabel.backgroundColor = model.leftColor
-        rightLabel.backgroundColor = model.rightColor
         theme.text = model.theme
         
         if newBackgroundColor.backgroundColor == #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) {

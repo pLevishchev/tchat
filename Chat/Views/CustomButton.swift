@@ -21,11 +21,15 @@ class CustomButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    convenience init(title: String) {
+        self.init(frame: .zero)
+        self.setTitle(title, for: .normal)
+    }
+    
     func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemGray
         layer.cornerRadius = 10
-        setTitle("Edit", for: .normal)
+        setTitle("Save", for: .normal)
         setTitleColor(.black, for: .normal)
     }
 }

@@ -6,15 +6,11 @@
 //  Copyright © 2020 p.levishchev. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct ThemeModel {
     var backgroundColor: UIColor
     var leftColor: UIColor
-    var rightColor: UIColor
     var fontColor: UIColor
     var theme: String
-    var onlineColor: UIColor
-    var offlineColor: UIColor
 }

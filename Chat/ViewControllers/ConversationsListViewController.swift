@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ConversationsListViewController: UIViewController {
+class ChannelsListViewController: UIViewController {
     var currentTheme: ThemeModel {
         ThemeManager.shared.currentTheme()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
@@ -41,7 +42,7 @@ class ConversationsListViewController: UIViewController {
     private let cellID = String(describing: ConversationCell.self)
     
     private func configureNavBar() {
-        navigationItem.title = "Chat"
+        navigationItem.title = "Channels"
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarButton())
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton())
     }
@@ -54,7 +55,7 @@ class ConversationsListViewController: UIViewController {
         
         let button = UIButton()
         imageView.addSubview(button)
-        button.addTarget(self, action:#selector(openSettings), for: .touchUpInside)
+        button.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -68,7 +69,7 @@ class ConversationsListViewController: UIViewController {
         
         let button = UIButton()
         imageView.addSubview(button)
-        button.addTarget(self, action:#selector(openProfile), for: .touchUpInside)
+        button.addTarget(self, action: #selector(openProfile), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -79,7 +80,7 @@ class ConversationsListViewController: UIViewController {
         let profileVC = ProfileViewController()
         let navController = UINavigationController(rootViewController: profileVC)
         
-        present(navController, animated:true, completion: nil)
+        present(navController, animated: true, completion: nil)
     }
     
     @objc func openSettings() {
@@ -88,40 +89,99 @@ class ConversationsListViewController: UIViewController {
     }
     
     @objc func dissmissVC() {
-        dismiss(animated: true, completion:  nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    
-    let conversations = [[ConversationCellModel(name: "A", message: "123", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: false),
-                          ConversationCellModel(name: "B", message: "789", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: true),
-                          ConversationCellModel(name: "C", message: nil, date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: false),
-                          ConversationCellModel(name: "D", message: "789", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: true),
-                          ConversationCellModel(name: "E", message: "789", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: false),
-                          ConversationCellModel(name: "F", message: "789", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: true),
-                          ConversationCellModel(name: "G", message: "789", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: true),
-                          ConversationCellModel(name: "H", message: nil, date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: true),
-                          ConversationCellModel(name: "I", message: "789", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: true),
-                          ConversationCellModel(name: "J", message: "789", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: true, hasUnreadMessages: true)],
-                         [ConversationCellModel(name: "K", message: "456", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: true),
-                          ConversationCellModel(name: "L", message: "456", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: false),
-                          ConversationCellModel(name: "M", message: "456", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: true),
-                          ConversationCellModel(name: "N", message: "456", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: false),
-                          ConversationCellModel(name: "O", message: nil, date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: false),
-                          ConversationCellModel(name: "P", message: "456", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: false),
-                          ConversationCellModel(name: "R", message: "456", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: false),
-                          ConversationCellModel(name: "S", message: nil, date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: false),
-                          ConversationCellModel(name: "T", message: "456", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: false),
-                          ConversationCellModel(name: "U", message: "456", date: Formatter.getDate(from: "2020/1/18 20:20"), isOnline: false, hasUnreadMessages: false)]
+    let conversations = [[ConversationCellModel(name: "A", message: "123",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "B", message: "789",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: true),
+                          ConversationCellModel(name: "C", message: nil,
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "D", message: "789",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: true),
+                          ConversationCellModel(name: "E", message: "789",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "F", message: "789",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: true),
+                          ConversationCellModel(name: "G", message: "789",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: true),
+                          ConversationCellModel(name: "H", message: nil,
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: true),
+                          ConversationCellModel(name: "I", message: "789",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: true),
+                          ConversationCellModel(name: "J", message: "789",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: true,
+                                                hasUnreadMessages: true)],
+                         [ConversationCellModel(name: "K", message: "456",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: true),
+                          ConversationCellModel(name: "L", message: "456",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "M", message: "456",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false, hasUnreadMessages: true),
+                          ConversationCellModel(name: "N", message: "456",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "O", message: nil,
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "P", message: "456",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "R", message: "456",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "S", message: nil,
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "T", message: "456",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: false),
+                          ConversationCellModel(name: "U", message: "456",
+                                                date: Formatter.getDate(from: "2020/1/18 20:20"),
+                                                isOnline: false,
+                                                hasUnreadMessages: false)]
     ]
 }
 
-extension ConversationsListViewController: UITableViewDataSource {
+extension ChannelsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return conversations[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? ConversationCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+                as? ConversationCell else {
             return UITableViewCell()
         }
         cell.configure(with: conversations[indexPath.section][indexPath.row])
@@ -134,15 +194,7 @@ extension ConversationsListViewController: UITableViewDataSource {
     }
 }
 
-extension ConversationsListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return Sections.Online.rawValue
-        default:
-            return Sections.History.rawValue
-        }
-    }
+extension ChannelsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ConversationViewController()
@@ -150,9 +202,4 @@ extension ConversationsListViewController: UITableViewDelegate {
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
-}
-
-enum Sections: String {
-    case Online
-    case History
 }

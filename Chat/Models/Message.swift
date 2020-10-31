@@ -1,5 +1,5 @@
 //
-//  MessageCellModel.swift
+//  Message.swift
 //  Chat
 //
 //  Created by Павел Левищев on 07.10.2020.
@@ -8,7 +8,9 @@
 
 import Foundation
 
-struct MessageCellModel {
-    let text: String
-    let isMyMessage: Bool
+struct Message {
+    let content: String
+    let created: Date
+    let senderId: String
+    let senderName: String
 }
