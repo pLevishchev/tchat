@@ -20,7 +20,7 @@ class GCDDataManager {
     
     func readDataFromFile(viewController: UIViewController, closure: @escaping () -> Void) {
         queue.async {
-            FileWriterService().readFile(viewController: viewController)
+//            FileWriterService().readFile(viewController: viewController)
             DispatchQueue.main.async {
                 closure()
             }

@@ -15,7 +15,6 @@ enum ScreenSize {
     static let minLength = min(ScreenSize.width, ScreenSize.height)
 }
 
-
 enum DeviceTypes {
     static let idiom = UIDevice.current.userInterfaceIdiom
     static let nativeScale = UIScreen.main.nativeScale

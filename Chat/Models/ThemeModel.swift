@@ -11,9 +11,6 @@ import UIKit
 struct ThemeModel {
     var backgroundColor: UIColor
     var leftColor: UIColor
-    var rightColor: UIColor
     var fontColor: UIColor
     var theme: String
-    var onlineColor: UIColor
-    var offlineColor: UIColor
 }

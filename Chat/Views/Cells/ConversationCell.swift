@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ConversationCell: UITableViewCell, ConfigurableView {
-    typealias ConfigurationModel = ConversationCellModel
+class ChannelCell: UITableViewCell, ConfigurableView {
+    typealias ConfigurationModel = Channel
     
     var currentTheme: ThemeModel {
         ThemeManager.shared.currentTheme()
@@ -33,30 +33,24 @@ class ConversationCell: UITableViewCell, ConfigurableView {
         //        avatar.image = UIImage(data: model.avatar)
         name.text = model.name
         
-        if model.message == nil {
-            message.font = UIFont.italicSystemFont(ofSize: 16.0)
-            message.text = "No messages yet"
-        } else {
-            message.font = UIFont.systemFont(ofSize: 16.0)
-            message.text = model.message
-        }
-        
-        if Date().hours(from: model.date) > 24 {
-            date.text = Formatter.getDate(from: model.date)
-        } else {
-            date.text = Formatter.getTime(from: model.date)
-        }
-        
-        if model.hasUnreadMessages && model.message != nil {
-            message.font = UIFont.boldSystemFont(ofSize: 16.0)
-        } else {
-            message.font = UIFont.systemFont(ofSize: 16.0)
-        }
-        
-        if model.isOnline {
-            backgroundColor = currentTheme.onlineColor
-        } else {
-            backgroundColor = currentTheme.offlineColor
-        }
+//        if model.message == nil {
+//            message.font = UIFont.italicSystemFont(ofSize: 16.0)
+//            message.text = "No messages yet"
+//        } else {
+//            message.font = UIFont.systemFont(ofSize: 16.0)
+//            message.text = model.message
+//        }
+//
+//        if Date().hours(from: model.date) > 24 {
+//            date.text = Formatter.getDate(from: model.date)
+//        } else {
+//            date.text = Formatter.getTime(from: model.date)
+//        }
+//
+//        if model.hasUnreadMessages && model.message != nil {
+//            message.font = UIFont.boldSystemFont(ofSize: 16.0)
+//        } else {
+//            message.font = UIFont.systemFont(ofSize: 16.0)
+//        }
     }
 }

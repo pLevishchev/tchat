@@ -41,7 +41,6 @@ class ProfileViewController: UIViewController, ILogger {
     @objc func startEdit() {
         isEditingMode = true
         
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar))
         logo.addGestureRecognizer(tap)
         
@@ -66,8 +65,14 @@ class ProfileViewController: UIViewController, ILogger {
     private func configNavBar() {
         navBar.translatesAutoresizingMaskIntoConstraints = false
         navigationItem.title = "My Profile"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissVC))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(startEdit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(dismissVC))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(startEdit))
     }
     
     private func configureLogo() {
@@ -78,7 +83,7 @@ class ProfileViewController: UIViewController, ILogger {
         }
         NSLayoutConstraint.activate([
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logo.topAnchor.constraint(equalTo: navBar.bottomAnchor, constant: 60),
+            logo.topAnchor.constraint(equalTo: navBar.bottomAnchor, constant: 60)
         ])
     }
     
@@ -201,7 +206,7 @@ class ProfileViewController: UIViewController, ILogger {
     }
     
     private func setUpUI() {
-        view.backgroundColor = currentTheme.offlineColor
+        view.backgroundColor = currentTheme.leftColor
         view.addSubviews(navBar, logo, name, bio, stackView, activityIndicator)
         activityIndicator.color = .black
         configureLogo()
@@ -245,9 +250,4 @@ extension ProfileViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) { 
         changeButtons()
     }
-}
-
-enum TypeAlert {
-    case ok
-    case fail
 }

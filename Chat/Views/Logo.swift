@@ -38,7 +38,7 @@ class Logo: UIView {
         
         NSLayoutConstraint.activate([
             self.heightAnchor.constraint(equalToConstant: size),
-            self.widthAnchor.constraint(equalToConstant: size),
+            self.widthAnchor.constraint(equalToConstant: size)
         ])
     }
     
@@ -62,7 +62,7 @@ class Logo: UIView {
         logoName.translatesAutoresizingMaskIntoConstraints = false
         logoName.adjustsFontSizeToFitWidth = true
         logoName.textColor = .black
-        logoName.font = UIFont(name:"Roboto", size: 0)
+        logoName.font = UIFont(name: "Roboto", size: 0)
         logoName.font = UIFont.boldSystemFont(ofSize: size)
         logoName.textAlignment = .center
         

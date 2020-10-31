@@ -12,7 +12,6 @@ import UIKit
 class FileWriterService {
     
     lazy var fileManager = FileManager.default
-//    guard let path = Bundle.main.path(forResource: fileName, ofType: "txt") else { return }
 
     var fileName: URL {
         fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("name.txt")
@@ -25,7 +24,6 @@ class FileWriterService {
         fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("photo.txt")
     }
     
-    
     func writeToFile(user: UserModel, viewController: UIViewController) {
         do {
             let name = user.name
@@ -35,11 +33,10 @@ class FileWriterService {
             }
             try name.write(to: fileName, atomically: true, encoding: .utf8)
             try bio.write(to: fileBio, atomically: true, encoding: .utf8)
-            
-            
-        }
-        catch {
-            viewController.presentAlertOnMainThread(title: "Ошибка", message: "Не удалось сохранить данные", type: .fail)
+        } catch {
+            viewController.presentAlertOnMainThread(title: "Ошибка",
+                                                    message: "Не удалось сохранить данные",
+                                                    type: .fail)
         }
     }
     
@@ -53,9 +50,10 @@ class FileWriterService {
                 let photo = (try? Data(contentsOf: photoFile)) ?? Data()
                 
                 return UserModel(name: name, bio: bio, photo: UIImage(data: photo))
-            }
-            catch {
-                viewController.presentAlertOnMainThread(title: "Ошибка", message: "Не удалось прочитать данные", type: .fail)
+            } catch {
+                viewController.presentAlertOnMainThread(title: "Ошибка",
+                                                        message: "Не удалось прочитать данные",
+                                                        type: .fail)
             }
         }
         return nil
