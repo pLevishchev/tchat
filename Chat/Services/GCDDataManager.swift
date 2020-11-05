@@ -31,7 +31,7 @@ class GCDDataManager {
 extension GCDDataManager: SaveDataProtocol {
     func saveUser(user: UserModel, viewController: UIViewController, closure: @escaping () -> Void) {
         queue.async {
-            FileWriterService().writeToFile(user: user, viewController: viewController)
+            CoreDataManager.shared.saveUserToDB(user: user)
             DispatchQueue.main.async {
                 closure()
             }

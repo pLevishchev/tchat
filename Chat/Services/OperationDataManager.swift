@@ -10,28 +10,37 @@ import Foundation
 import UIKit
 
 class OperationDataManager: Operation {
-    
+    let operationQueue = OperationQueue()
+}
+
+class WriteDataOperation: Operation {
     let user: UserModel
     let viewController: UIViewController
-        
+    var result: Bool
+    
     init(user: UserModel, viewController: UIViewController) {
         self.user = user
         self.viewController = viewController
+        self.result = false
     }
-        
+    
     override func main() {
         FileWriterService().writeToFile(user: user, viewController: viewController)
+        result = true
     }
 }
 
 extension OperationDataManager: SaveDataProtocol {
     func saveUser(user: UserModel, viewController: UIViewController, closure: @escaping () -> Void) {
-        let operation = OperationDataManager(user: user, viewController: viewController)
-        let opQueue = OperationQueue()
-        OperationQueue.main.addOperation {
-            closure()
+        let operation = WriteDataOperation(user: user, viewController: viewController)
+        operationQueue.addOperation(operation)
+        let operation2 = BlockOperation {
+            if operation.result {
+                closure()
+            } else {
+                print("При записи что-то пошло не так")
+            }
         }
-        opQueue.addOperation(operation)
-
+        operation2.addDependency(operation)
     }
 }

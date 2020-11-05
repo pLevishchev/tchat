@@ -24,7 +24,7 @@ class FileWriterService {
         fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("photo.txt")
     }
     
-    func writeToFile(user: UserModel, viewController: UIViewController) {
+    func writeToFile(user: UserModel, viewController: IShowAlert) {
         do {
             let name = user.name
             let bio = user.bio
@@ -40,7 +40,7 @@ class FileWriterService {
         }
     }
     
-    func readFile(viewController: UIViewController) -> UserModel? {
+    func readFile(viewController: IShowAlert) -> UserModel? {
         if fileManager.fileExists(atPath: fileName.path) ||
            fileManager.fileExists(atPath: fileBio.path) ||
            fileManager.fileExists(atPath: photoFile.path) {

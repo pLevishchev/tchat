@@ -9,10 +9,10 @@
 import Foundation
 
 extension Date {
-        /// Returns the amount of years from another date
-        func years(from date: Date) -> Int {
-            return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
-        }
+    /// Returns the amount of years from another date
+    func years(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
+    }
     /// Returns the amount of months from another date
     func months(from date: Date) -> Int {
         return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0

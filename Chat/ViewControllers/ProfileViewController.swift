@@ -16,17 +16,14 @@ class ProfileViewController: UIViewController, ILogger {
     private lazy var logo = Logo()
     private let name = UITextField()
     private let bio = UITextView()
-    private let gcdButton = CustomButton(title: "GCD")
-    private let operationButton = CustomButton(title: "Operation")
+    private let saveButton = CustomButton(title: "Сохранить")
     private let navBar = UINavigationBar()
     private let stackView = UIStackView()
     private var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     private var isEditingMode = false
     
-    private var user = UserModel(name: "Павел Левищев",
-                                 bio: "Try to do something interesting",
-                                 photo: nil)
+    private var user = CoreDataManager.shared.fetchUser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +73,7 @@ class ProfileViewController: UIViewController, ILogger {
     }
     
     private func configureLogo() {
-        if let photo = FileWriterService().readFile(viewController: self)?.photo {
+        if let photo = user.photo {
             logo.avatar.image = photo
         } else {
             logo.logoName.text = user.firstLetterName()
@@ -95,8 +92,8 @@ class ProfileViewController: UIViewController, ILogger {
         name.textColor = .black
         name.font = UIFont.boldSystemFont(ofSize: 25)
         name.textAlignment = .center
-        name.text = FileWriterService().readFile(viewController: self)?.name ?? "\(user.name)"
-        name.addTarget(self, action: #selector(changeButtons), for: .editingChanged)
+        name.text = user.name
+        name.addTarget(self, action: #selector(changeButton), for: .editingChanged)
         
         NSLayoutConstraint.activate([
             name.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 32),
@@ -106,31 +103,25 @@ class ProfileViewController: UIViewController, ILogger {
         ])
     }
     
-    @objc private func changeButtons() {
-        gcdButton.isEnabled = true
-        gcdButton.backgroundColor = .white
-        operationButton.isEnabled = true
-        operationButton.backgroundColor = .white
+    @objc private func changeButton() {
+        saveButton.isEnabled = true
+        saveButton.backgroundColor = .white
     }
     
     private func saveData(user: UserModel, executor: SaveDataProtocol) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
-        gcdButton.isEnabled = false
-        gcdButton.backgroundColor = .systemGray
-        operationButton.isEnabled = false
-        operationButton.backgroundColor = .systemGray
+        saveButton.isEnabled = false
+        saveButton.backgroundColor = .systemGray
         
         executor.saveUser(user: user, viewController: self) {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             self.name.isEnabled = false
             self.bio.isEditable = false
-            self.gcdButton.isEnabled = false
-            self.gcdButton.backgroundColor = .systemGray
-            self.operationButton.isEnabled = false
-            self.operationButton.backgroundColor = .systemGray
+            self.saveButton.isEnabled = false
+            self.saveButton.backgroundColor = .systemGray
             self.presentAlertOnMainThread(title: "Данные сохранены", message: nil, type: .ok)
         }
     }
@@ -144,7 +135,7 @@ class ProfileViewController: UIViewController, ILogger {
         bio.backgroundColor = view.backgroundColor
         bio.font = UIFont.systemFont(ofSize: 20)
         bio.textAlignment = .center
-        bio.text = FileWriterService().readFile(viewController: self)?.bio ?? "\(user.bio)"
+        bio.text = user.bio
         
         NSLayoutConstraint.activate([
             bio.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 32),
@@ -161,16 +152,10 @@ class ProfileViewController: UIViewController, ILogger {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = padding
-        stackView.addArrangedSubview(gcdButton)
-        stackView.addArrangedSubview(operationButton)
-        
-        gcdButton.isEnabled = false
-        gcdButton.backgroundColor = .systemGray
-        operationButton.isEnabled = false
-        operationButton.backgroundColor = .systemGray
-        
-        gcdButton.addTarget(self, action: #selector(saveDataByGCD), for: .touchUpInside)
-        operationButton.addTarget(self, action: #selector(saveDataByOperation), for: .touchUpInside)
+        stackView.addArrangedSubview(saveButton)
+        saveButton.isEnabled = false
+        saveButton.backgroundColor = .systemGray
+        saveButton.addTarget(self, action: #selector(saveDataByGCD), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -190,12 +175,6 @@ class ProfileViewController: UIViewController, ILogger {
     @objc func saveDataByGCD() {
         switchOffBorders()
         saveData(user: fillModelCurrentData(), executor: GCDDataManager())
-    }
-    
-    @objc func saveDataByOperation() {
-        switchOffBorders()
-        let user = fillModelCurrentData()
-        saveData(user: user, executor: OperationDataManager(user: user, viewController: self))
     }
     
     private func switchOffBorders() {
@@ -248,6 +227,6 @@ extension ProfileViewController: UITextFieldDelegate {
 
 extension ProfileViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) { 
-        changeButtons()
+        changeButton()
     }
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3C23DCBD254D8848005D5455 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23DCBC254D8848005D5455 /* Generator.swift */; };
+		3C23DCC325508764005D5455 /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C23DCC125508764005D5455 /* User.xcdatamodeld */; };
+		3C23DCC725508B8D005D5455 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23DCC625508B8D005D5455 /* CoreDataStack.swift */; };
 		3C45DE292540C55200A62C35 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45DE282540C55200A62C35 /* UIViewController+Ext.swift */; };
 		3C45DE3A2543305B00A62C35 /* SaveDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45DE392543305B00A62C35 /* SaveDataProtocol.swift */; };
 		3C4BD82A254B16D100C515F3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4BD829254B16D100C515F3 /* FirebaseManager.swift */; };
@@ -47,12 +49,16 @@
 		4773EF18251F7BA6006CEBC3 /* ChannelsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF17251F7BA6006CEBC3 /* ChannelsListViewController.swift */; };
 		4773EF1D251F9733006CEBC3 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF1B251F9733006CEBC3 /* ChannelCell.swift */; };
 		4773EF1E251F9733006CEBC3 /* ChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4773EF1C251F9733006CEBC3 /* ChannelCell.xib */; };
+		47E354942553F7BC00AE197D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E354932553F7BC00AE197D /* CoreDataManager.swift */; };
+		47E354962553F82300AE197D /* ObjectsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E354952553F82300AE197D /* ObjectsExtensions.swift */; };
 		7B1C6B67184EB479F93FC99E /* Pods_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2274628FFD5077D81A3CC9C7 /* Pods_Chat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2274628FFD5077D81A3CC9C7 /* Pods_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C23DCBC254D8848005D5455 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
+		3C23DCC225508764005D5455 /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
+		3C23DCC625508B8D005D5455 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		3C45DE282540C55200A62C35 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		3C45DE392543305B00A62C35 /* SaveDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDataProtocol.swift; sourceTree = "<group>"; };
 		3C4BD829254B16D100C515F3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -94,6 +100,8 @@
 		4773EF17251F7BA6006CEBC3 /* ChannelsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsListViewController.swift; sourceTree = "<group>"; };
 		4773EF1B251F9733006CEBC3 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		4773EF1C251F9733006CEBC3 /* ChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelCell.xib; sourceTree = "<group>"; };
+		47E354932553F7BC00AE197D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		47E354952553F82300AE197D /* ObjectsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsExtensions.swift; sourceTree = "<group>"; };
 		4B353EF64EDA824015A0E06A /* Pods-Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.debug.xcconfig"; path = "Target Support Files/Pods-Chat/Pods-Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		8945C329E4430979E9F1E1D3 /* Pods-Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.release.xcconfig"; path = "Target Support Files/Pods-Chat/Pods-Chat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,6 +118,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C23DCC02550862A005D5455 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				3C23DCC125508764005D5455 /* User.xcdatamodeld */,
+				3C23DCC625508B8D005D5455 /* CoreDataStack.swift */,
+				47E354932553F7BC00AE197D /* CoreDataManager.swift */,
+				47E354952553F82300AE197D /* ObjectsExtensions.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
 		3C6E03522534E27100F3DA56 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +193,7 @@
 		473E022425150E44002565FF /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				3C23DCC02550862A005D5455 /* Core Data */,
 				3C6E03522534E27100F3DA56 /* Services */,
 				3CBC7AA7252DE189000BBD80 /* Protocols */,
 				47214E2F2518E9E100BF43C4 /* Utilities */,
@@ -402,11 +422,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C23DCC725508B8D005D5455 /* CoreDataStack.swift in Sources */,
 				3CEAD1B125309C1700F3D10C /* ThemeModel.swift in Sources */,
 				3CBC7AA4252DDF28000BBD80 /* MessageCell.swift in Sources */,
 				3C45DE292540C55200A62C35 /* UIViewController+Ext.swift in Sources */,
 				3CEAD1AD2530987900F3D10C /* ThemeCell.swift in Sources */,
 				3C6E0366253CDC9300F3DA56 /* FileWriterService.swift in Sources */,
+				47E354942553F7BC00AE197D /* CoreDataManager.swift in Sources */,
 				4712EB79252CB595000661CB /* Formatter.swift in Sources */,
 				3C23DCBD254D8848005D5455 /* Generator.swift in Sources */,
 				3CBC7AA9252DE1AA000BBD80 /* ConfigurableView.swift in Sources */,
@@ -416,6 +438,8 @@
 				3C6E0363253CDBA500F3DA56 /* OperationDataManager.swift in Sources */,
 				473E022A25150E44002565FF /* ProfileViewController.swift in Sources */,
 				3C6E034B2530E22500F3DA56 /* ThemesPickerDelegate.swift in Sources */,
+				3C23DCC325508764005D5455 /* User.xcdatamodeld in Sources */,
+				47E354962553F82300AE197D /* ObjectsExtensions.swift in Sources */,
 				4773EF1D251F9733006CEBC3 /* ChannelCell.swift in Sources */,
 				4773EF18251F7BA6006CEBC3 /* ChannelsListViewController.swift in Sources */,
 				3C6E0358253623EE00F3DA56 /* PaddingLabel.swift in Sources */,
@@ -634,6 +658,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3C23DCC125508764005D5455 /* User.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3C23DCC225508764005D5455 /* User.xcdatamodel */,
+			);
+			currentVersion = 3C23DCC225508764005D5455 /* User.xcdatamodel */;
+			path = User.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 473E021A25150E44002565FF /* Project object */;
 }
