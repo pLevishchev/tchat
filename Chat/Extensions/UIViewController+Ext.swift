@@ -8,7 +8,11 @@
 
 import UIKit
 
-extension UIViewController {
+protocol IShowAlert {
+    func presentAlertOnMainThread(title: String, message: String?, type: TypeAlert)
+}
+
+extension UIViewController: IShowAlert {
     
     func presentAlertOnMainThread(title: String, message: String?, type: TypeAlert) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
