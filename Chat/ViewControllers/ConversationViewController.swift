@@ -14,7 +14,12 @@ class ConversationViewController: UIViewController {
     var currentTheme: ThemeModel {
         ThemeManager.shared.currentTheme()
     }
-    var messages = [Message]()
+    var messages = [Message]() {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    
     var idChannel: String = ""
     
     override func viewDidLoad() {
@@ -23,7 +28,6 @@ class ConversationViewController: UIViewController {
         configSenderView()
         tableView.backgroundColor = currentTheme.backgroundColor
         getDataFromDB()
-        tableView.reloadData()
     }
     
     private lazy var tableView: UITableView = {

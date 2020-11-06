@@ -110,4 +110,35 @@ class CoreDataStack {
             try performSave(in: parent)
         }
     }
+    
+    // MARK: - Observers
+    func enableObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(managedObjectContextObjectsDidChanged(notification:)),
+                                       name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
+                                       object: mainContext)
+    }
+    
+    @objc
+    private func managedObjectContextObjectsDidChanged(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        didUpdateDataBase?(self)
+        
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>,
+            inserts.count > 0 {
+            print("Inserted objects count: \(inserts.count)")
+        }
+        
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>,
+            updates.count > 0 {
+            print("Updates objects count: \(updates.count)")
+        }
+        
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>,
+            deletes.count > 0 {
+            print("Deleted objects count: \(deletes.count)")
+        }
+    }
 }

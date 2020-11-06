@@ -12,7 +12,11 @@ class ChannelsListViewController: UIViewController {
     var currentTheme: ThemeModel {
         ThemeManager.shared.currentTheme()
     }
-    var channels = [Channel]()
+    var channels = [Channel]() {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
