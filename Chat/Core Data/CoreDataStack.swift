@@ -19,7 +19,7 @@ class CoreDataStack {
         return documentsUrl.appendingPathComponent("Chat.sqlite")
     }()
     
-    private let dataModelName = "User"
+    private let dataModelName = "Chat"
     private let dataModelExtension = "momd"
     
     // MARK: - Core Data Stack

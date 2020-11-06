@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C23DCBD254D8848005D5455 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23DCBC254D8848005D5455 /* Generator.swift */; };
-		3C23DCC325508764005D5455 /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C23DCC125508764005D5455 /* User.xcdatamodeld */; };
+		3C23DCC325508764005D5455 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C23DCC125508764005D5455 /* Chat.xcdatamodeld */; };
 		3C23DCC725508B8D005D5455 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23DCC625508B8D005D5455 /* CoreDataStack.swift */; };
 		3C45DE292540C55200A62C35 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45DE282540C55200A62C35 /* UIViewController+Ext.swift */; };
 		3C45DE3A2543305B00A62C35 /* SaveDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45DE392543305B00A62C35 /* SaveDataProtocol.swift */; };
@@ -46,6 +46,7 @@
 		473E023B25151242002565FF /* ILogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E023A25151242002565FF /* ILogger.swift */; };
 		473E023E25188E0E002565FF /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E023D25188E0E002565FF /* UIView+Ext.swift */; };
 		473E02412518BD03002565FF /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E02402518BD02002565FF /* Logo.swift */; };
+		476FFC502555666400955052 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FFC4F2555666400955052 /* FetchResult.swift */; };
 		4773EF18251F7BA6006CEBC3 /* ChannelsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF17251F7BA6006CEBC3 /* ChannelsListViewController.swift */; };
 		4773EF1D251F9733006CEBC3 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF1B251F9733006CEBC3 /* ChannelCell.swift */; };
 		4773EF1E251F9733006CEBC3 /* ChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4773EF1C251F9733006CEBC3 /* ChannelCell.xib */; };
@@ -97,6 +98,7 @@
 		473E023A25151242002565FF /* ILogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILogger.swift; sourceTree = "<group>"; };
 		473E023D25188E0E002565FF /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		473E02402518BD02002565FF /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
+		476FFC4F2555666400955052 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		4773EF17251F7BA6006CEBC3 /* ChannelsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsListViewController.swift; sourceTree = "<group>"; };
 		4773EF1B251F9733006CEBC3 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		4773EF1C251F9733006CEBC3 /* ChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelCell.xib; sourceTree = "<group>"; };
@@ -121,7 +123,7 @@
 		3C23DCC02550862A005D5455 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				3C23DCC125508764005D5455 /* User.xcdatamodeld */,
+				3C23DCC125508764005D5455 /* Chat.xcdatamodeld */,
 				3C23DCC625508B8D005D5455 /* CoreDataStack.swift */,
 				47E354932553F7BC00AE197D /* CoreDataManager.swift */,
 				47E354952553F82300AE197D /* ObjectsExtensions.swift */,
@@ -138,6 +140,7 @@
 				3C6E0365253CDC9300F3DA56 /* FileWriterService.swift */,
 				3C4BD829254B16D100C515F3 /* FirebaseManager.swift */,
 				3C23DCBC254D8848005D5455 /* Generator.swift */,
+				476FFC4F2555666400955052 /* FetchResult.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				3CEAD1AD2530987900F3D10C /* ThemeCell.swift in Sources */,
 				3C6E0366253CDC9300F3DA56 /* FileWriterService.swift in Sources */,
 				47E354942553F7BC00AE197D /* CoreDataManager.swift in Sources */,
+				476FFC502555666400955052 /* FetchResult.swift in Sources */,
 				4712EB79252CB595000661CB /* Formatter.swift in Sources */,
 				3C23DCBD254D8848005D5455 /* Generator.swift in Sources */,
 				3CBC7AA9252DE1AA000BBD80 /* ConfigurableView.swift in Sources */,
@@ -438,7 +442,7 @@
 				3C6E0363253CDBA500F3DA56 /* OperationDataManager.swift in Sources */,
 				473E022A25150E44002565FF /* ProfileViewController.swift in Sources */,
 				3C6E034B2530E22500F3DA56 /* ThemesPickerDelegate.swift in Sources */,
-				3C23DCC325508764005D5455 /* User.xcdatamodeld in Sources */,
+				3C23DCC325508764005D5455 /* Chat.xcdatamodeld in Sources */,
 				47E354962553F82300AE197D /* ObjectsExtensions.swift in Sources */,
 				4773EF1D251F9733006CEBC3 /* ChannelCell.swift in Sources */,
 				4773EF18251F7BA6006CEBC3 /* ChannelsListViewController.swift in Sources */,
@@ -660,13 +664,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		3C23DCC125508764005D5455 /* User.xcdatamodeld */ = {
+		3C23DCC125508764005D5455 /* Chat.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				3C23DCC225508764005D5455 /* User.xcdatamodel */,
 			);
 			currentVersion = 3C23DCC225508764005D5455 /* User.xcdatamodel */;
-			path = User.xcdatamodeld;
+			path = Chat.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -19,10 +19,8 @@ class ChannelsListViewController: UIViewController {
         configureNavBar()
         view.addSubview(tableView)
         //        UINavigationBar.appearance().barTintColor = ThemeService.shared.currentTheme().backgroundColor
-        FirebaseManager().fetchChannels { channels in
-            self.channels = channels
-            self.tableView.reloadData()
-        }
+        getDataFromDB()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +28,21 @@ class ChannelsListViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = currentTheme.backgroundColor
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: currentTheme.fontColor]
         tableView.reloadData()
+    }
+    
+    func getDataFromDB() {
+        FirebaseManager().fetchChannels { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let channels):
+                self.channels = channels
+            //                channels.sort { $0.channel.lastActivity ?? .distantPast > $1.channel.lastActivity ?? .distantPast }
+            case .failure(let error):
+                self.presentAlertOnMainThread(title: "Не удалось получить список каналов",
+                                              message: error.localizedDescription,
+                                              type: .fail)
+            }
+        }
     }
     
     private lazy var tableView: UITableView = {
@@ -140,21 +153,21 @@ class ChannelsListViewController: UIViewController {
 
 extension ChannelsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-  
+        
         return channels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-                as? ChannelCell else {
-            return UITableViewCell()
+            as? ChannelCell else {
+                return UITableViewCell()
         }
-
+        
         cell.configure(with: channels[indexPath.row])
         
         return cell
     }
-
+    
 }
 
 extension ChannelsListViewController: UITableViewDelegate {

@@ -14,54 +14,44 @@ class FirebaseManager {
     lazy var db = Firestore.firestore()
     lazy var channelRef = db.collection("channels")
     
-    func fetchChannels(completion: @escaping ([Channel]) -> Void) {
-        var channels = [Channel]()
-        channelRef.order(by: "lastActivity").getDocuments { (snapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in snapshot!.documents {
-                    var date = Date()
-                    let data = document.data()
-                    let identifier = document.documentID
-                    guard let name = data["name"] as? String else { return }
-                    let lastMessage = data["lastMessage"] as? String? ?? "Сообщений еще не было"
-                    if let lastActivity = data["lastActivity"] as? Timestamp {
-                        date = Date(timeIntervalSince1970: TimeInterval(lastActivity.seconds))
-                    }
-                    
-                    channels.append(Channel(identifier: identifier,
-                                            name: name,
-                                            lastMessage: lastMessage,
-                                            lastActivity: date))
-                    completion(channels)
-                }
+    func fetchChannels(completion: @escaping (FetchResult<[Channel], Error>) -> Void) {
+        channelRef.order(by: "lastActivity").addSnapshotListener { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
             }
+            
+            guard let snapshot = snapshot else { return }
+            
+            let channels = snapshot.documents.compactMap { document -> Channel? in
+                let channel = Channel(data: document.data(), documentID: document.documentID)
+                return channel
+            }
+            
+            CoreDataManager.shared.saveChannelsToDB(channels: channels)
+            completion(.success(channels))
         }
     }
     
-    func fetchMessages(channel id: String, completion: @escaping ([Message]) -> Void) {
-        var messages = [Message]()
-        
-        channelRef.document(id).collection("messages").order(by: "created").getDocuments { (snapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in snapshot!.documents {
-                    let data = document.data()
-                    
-                    guard let content = data["content"] as? String else { return }
-                    guard let created = data["created"] as? Timestamp else { return }
-                    guard let senderId = data["senderId"] as? String else { return }
-                    guard let senderName = data["senderName"] as? String else { return }
-                    
-                    messages.append(Message(content: content,
-                                            created: Date(timeIntervalSince1970: TimeInterval(created.seconds)),
-                                            senderId: senderId,
-                                            senderName: senderName))
-                    completion(messages)
-                }
+    func fetchMessages(channel id: String, completion: @escaping (FetchResult<[Message], Error>) -> Void) {
+        let messagesReference = channelRef.document(id).collection("messages")
+
+        messagesReference.order(by: "created").addSnapshotListener { snapshot, error in
+
+            if let error = error {
+                completion(.failure(error))
+                return
             }
+
+            guard let snapshot = snapshot else { return }
+
+            let messages = snapshot.documents.compactMap { document -> Message? in
+                let message = Message(data: document.data(), documentID: document.documentID)
+                return message
+            }
+
+            CoreDataManager.shared.saveMessagesToDB(channelID: id, messages: messages)
+            completion(.success(messages))
         }
     }
     

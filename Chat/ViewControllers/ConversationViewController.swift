@@ -9,23 +9,21 @@
 import UIKit
 
 class ConversationViewController: UIViewController {
-        
+    
     var sendView = SendMessageView()
     var currentTheme: ThemeModel {
         ThemeManager.shared.currentTheme()
     }
     var messages = [Message]()
     var idChannel: String = ""
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubviews(tableView, sendView)
         configSenderView()
         tableView.backgroundColor = currentTheme.backgroundColor
-        FirebaseManager().fetchMessages(channel: idChannel) { messages in
-            self.messages = messages
-            self.tableView.reloadData()
-        }
+        getDataFromDB()
+        tableView.reloadData()
     }
     
     private lazy var tableView: UITableView = {
@@ -37,6 +35,19 @@ class ConversationViewController: UIViewController {
         
         return tableView
     }()
+    
+    func getDataFromDB() {
+        FirebaseManager().fetchMessages(channel: idChannel) {  [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let messages):
+                self.messages = messages
+            case .failure(let error):
+                self.presentAlertOnMainThread(title: "Не удалось получить список каналов",
+                                              message: error.localizedDescription,
+                                              type: .fail)            }
+        }
+    }
     
     private func configSenderView() {
         sendView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +63,7 @@ class ConversationViewController: UIViewController {
     
     @objc private func send() {
         let uuid = Generator().uuid()
-        let message = Message(content: sendView.textField.text, created: Date(), senderId: uuid, senderName: "test")
+        let message = Message(identifier: idChannel, content: sendView.textField.text, created: Date(), senderId: uuid, senderName: "test")
         FirebaseManager().writeMessage(in: idChannel, message: message)
         DispatchQueue.main.async {
             self.sendView.textField.text = ""
@@ -84,4 +95,3 @@ extension ConversationViewController: UITableViewDataSource {
         return cell
     }
 }
-
