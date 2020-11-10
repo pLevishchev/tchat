@@ -14,10 +14,10 @@ class FirebaseManager {
     lazy var db = Firestore.firestore()
     lazy var channelRef = db.collection("channels")
     
-    func fetchChannels(completion: @escaping (FetchResult<[Channel], Error>) -> Void) {
+    func fetchChannels(completion: @escaping (Error?) -> Void) {
         channelRef.order(by: "lastActivity").addSnapshotListener { snapshot, error in
             if let error = error {
-                completion(.failure(error))
+                completion(error)
                 return
             }
             
@@ -29,29 +29,29 @@ class FirebaseManager {
             }
             
             CoreDataManager.shared.saveChannelsToDB(channels: channels)
-            completion(.success(channels))
+            completion(nil)
         }
     }
     
-    func fetchMessages(channel id: String, completion: @escaping (FetchResult<[Message], Error>) -> Void) {
+    func fetchMessages(channel id: String, completion: @escaping (Error?) -> Void) {
         let messagesReference = channelRef.document(id).collection("messages")
-
+        
         messagesReference.order(by: "created").addSnapshotListener { snapshot, error in
-
+            
             if let error = error {
-                completion(.failure(error))
+                completion(error)
                 return
             }
-
+            
             guard let snapshot = snapshot else { return }
-
+            
             let messages = snapshot.documents.compactMap { document -> Message? in
                 let message = Message(data: document.data(), documentID: document.documentID)
                 return message
             }
-
+            
             CoreDataManager.shared.saveMessagesToDB(channelID: id, messages: messages)
-            completion(.success(messages))
+            completion(nil)
         }
     }
     

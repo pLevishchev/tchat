@@ -7,15 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class ChannelsListViewController: UIViewController {
     var currentTheme: ThemeModel {
         ThemeManager.shared.currentTheme()
-    }
-    var channels = [Channel]() {
-        didSet {
-            self.tableView.reloadData()
-        }
     }
     
     override func viewDidLoad() {
@@ -35,13 +31,14 @@ class ChannelsListViewController: UIViewController {
     }
     
     func getDataFromDB() {
-        FirebaseManager().fetchChannels { [weak self] result in
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("Unable to fetch channel messages: \(error.localizedDescription)")
+        }
+        FirebaseManager().fetchChannels { [weak self] error in
             guard let self = self else { return }
-            switch result {
-            case .success(let channels):
-                self.channels = channels
-            //                channels.sort { $0.channel.lastActivity ?? .distantPast > $1.channel.lastActivity ?? .distantPast }
-            case .failure(let error):
+            if let error = error {
                 self.presentAlertOnMainThread(title: "Не удалось получить список каналов",
                                               message: error.localizedDescription,
                                               type: .fail)
@@ -136,7 +133,7 @@ class ChannelsListViewController: UIViewController {
                                       lastMessage: nil,
                                       lastActivity: nil)
                 FirebaseManager().writeChannel(channel: channel)
-                self.channels.append(channel)
+//                self.channels.append(channel)
                 self.tableView.reloadData()
             }
             
@@ -153,12 +150,30 @@ class ChannelsListViewController: UIViewController {
     @objc func dissmissVC() {
         dismiss(animated: true, completion: nil)
     }
+    
+    private lazy var fetchedResultsController: NSFetchedResultsController<ChannelDB> = {
+        let context = CoreDataManager.shared.coreDataStack.mainContext
+        
+        let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+        let sortByCreated = NSSortDescriptor(key: "lastActivity", ascending: true)
+        
+        fetchRequest.sortDescriptors = [sortByCreated]
+        fetchRequest.fetchBatchSize = 32
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: context,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
 }
 
 extension ChannelsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return channels.count
+        return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -167,20 +182,64 @@ extension ChannelsListViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
         
-        cell.configure(with: channels[indexPath.row])
+        let channel = fetchedResultsController.object(at: indexPath)
+        if let channel = Channel(data: channel) {
+            cell.configure(with: channel)
+        }
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
 
 extension ChannelsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ConversationViewController()
-        vc.navigationItem.title = channels[indexPath.row].name
-        vc.idChannel = channels[indexPath.row].identifier
+        vc.navigationItem.title = fetchedResultsController.object(at: indexPath).name
+        vc.idChannel = fetchedResultsController.object(at: indexPath).identifier ?? ""
         
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension ChannelsListViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        default:
+            break
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
 }

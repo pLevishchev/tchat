@@ -31,4 +31,17 @@ extension Message {
         self.senderId = senderId
         self.senderName = senderName
     }
+    
+    init?(data: MessageDB) {
+          guard let identifier = data.identifier, let content = data.content, let created = data.created,
+              let senderId = data.senderId, let senderName = data.senderName else {
+                  return nil
+          }
+          
+          self.identifier = identifier
+          self.content = content
+          self.created = created
+          self.senderId = senderId
+          self.senderName = senderName
+      }
 }

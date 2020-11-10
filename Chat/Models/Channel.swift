@@ -31,4 +31,18 @@ extension Channel {
         self.lastMessage = lastMessage
         self.lastActivity = timestamp?.dateValue()
     }
+    
+    init?(data: ChannelDB) {
+        guard let identifier = data.identifier,
+            let name = data.name,
+            let lastMessage = data.lastMessage,
+            let lastActivity = data.lastActivity else {
+                return nil
+        }
+        
+        self.identifier = identifier
+        self.name = name
+        self.lastMessage = lastMessage
+        self.lastActivity = lastActivity
+    }
 }

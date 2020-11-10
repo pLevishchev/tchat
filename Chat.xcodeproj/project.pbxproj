@@ -46,7 +46,6 @@
 		473E023B25151242002565FF /* ILogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E023A25151242002565FF /* ILogger.swift */; };
 		473E023E25188E0E002565FF /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E023D25188E0E002565FF /* UIView+Ext.swift */; };
 		473E02412518BD03002565FF /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E02402518BD02002565FF /* Logo.swift */; };
-		476FFC502555666400955052 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FFC4F2555666400955052 /* FetchResult.swift */; };
 		4773EF18251F7BA6006CEBC3 /* ChannelsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF17251F7BA6006CEBC3 /* ChannelsListViewController.swift */; };
 		4773EF1D251F9733006CEBC3 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773EF1B251F9733006CEBC3 /* ChannelCell.swift */; };
 		4773EF1E251F9733006CEBC3 /* ChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4773EF1C251F9733006CEBC3 /* ChannelCell.xib */; };
@@ -98,7 +97,6 @@
 		473E023A25151242002565FF /* ILogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILogger.swift; sourceTree = "<group>"; };
 		473E023D25188E0E002565FF /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		473E02402518BD02002565FF /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
-		476FFC4F2555666400955052 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		4773EF17251F7BA6006CEBC3 /* ChannelsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsListViewController.swift; sourceTree = "<group>"; };
 		4773EF1B251F9733006CEBC3 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		4773EF1C251F9733006CEBC3 /* ChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelCell.xib; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 				3C6E0365253CDC9300F3DA56 /* FileWriterService.swift */,
 				3C4BD829254B16D100C515F3 /* FirebaseManager.swift */,
 				3C23DCBC254D8848005D5455 /* Generator.swift */,
-				476FFC4F2555666400955052 /* FetchResult.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -432,7 +429,6 @@
 				3CEAD1AD2530987900F3D10C /* ThemeCell.swift in Sources */,
 				3C6E0366253CDC9300F3DA56 /* FileWriterService.swift in Sources */,
 				47E354942553F7BC00AE197D /* CoreDataManager.swift in Sources */,
-				476FFC502555666400955052 /* FetchResult.swift in Sources */,
 				4712EB79252CB595000661CB /* Formatter.swift in Sources */,
 				3C23DCBD254D8848005D5455 /* Generator.swift in Sources */,
 				3CBC7AA9252DE1AA000BBD80 /* ConfigurableView.swift in Sources */,

@@ -40,7 +40,7 @@ class CoreDataManager: ICoreDataManager {
     func saveMessagesToDB(channelID: String, messages: [Message]) {
         coreDataStack.save { context in
             let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "identifier = '\(channelID)'")
+            fetchRequest.predicate = NSPredicate(format: "identifier = %@", channelID)
             let results = try? context.fetch(fetchRequest)
             if let channel = results?.first {
                 let messagesDB = messages.map { MessageDB(message: $0, in: context) }
@@ -68,4 +68,5 @@ class CoreDataManager: ICoreDataManager {
         }
         return user
     }
+
 }
