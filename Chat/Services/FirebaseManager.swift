@@ -20,14 +20,13 @@ class FirebaseManager {
                 completion(error)
                 return
             }
-            
+            CoreDataManager.shared.removeChannels()
             guard let snapshot = snapshot else { return }
-            
             let channels = snapshot.documents.compactMap { document -> Channel? in
+
                 let channel = Channel(data: document.data(), documentID: document.documentID)
                 return channel
             }
-            
             CoreDataManager.shared.saveChannelsToDB(channels: channels)
             completion(nil)
         }
@@ -42,9 +41,8 @@ class FirebaseManager {
                 completion(error)
                 return
             }
-            
+            CoreDataManager.shared.removeMessages()
             guard let snapshot = snapshot else { return }
-            
             let messages = snapshot.documents.compactMap { document -> Message? in
                 let message = Message(data: document.data(), documentID: document.documentID)
                 return message
@@ -85,6 +83,16 @@ class FirebaseManager {
                 print("Error writing document: \(err)")
             } else {
                 print(channel)
+            }
+        }
+    }
+    
+    func deleteChannel(id channel: String, complition: @escaping (Error?) -> Void) {
+        channelRef.document(channel).delete() { (error) in
+            if let error = error {
+                complition(error)
+            } else {
+                complition(nil)
             }
         }
     }

@@ -27,7 +27,6 @@ class ChannelsListViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.barTintColor = currentTheme.backgroundColor
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: currentTheme.fontColor]
-        tableView.reloadData()
     }
     
     func getDataFromDB() {
@@ -133,7 +132,6 @@ class ChannelsListViewController: UIViewController {
                                       lastMessage: nil,
                                       lastActivity: nil)
                 FirebaseManager().writeChannel(channel: channel)
-//                self.channels.append(channel)
                 self.tableView.reloadData()
             }
             
@@ -152,10 +150,10 @@ class ChannelsListViewController: UIViewController {
     }
     
     private lazy var fetchedResultsController: NSFetchedResultsController<ChannelDB> = {
-        let context = CoreDataManager.shared.coreDataStack.mainContext
+        let context = CoreDataManager.shared.context
         
         let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
-        let sortByCreated = NSSortDescriptor(key: "lastActivity", ascending: true)
+        let sortByCreated = NSSortDescriptor(key: "lastActivity", ascending: false)
         
         fetchRequest.sortDescriptors = [sortByCreated]
         fetchRequest.fetchBatchSize = 32
@@ -209,7 +207,19 @@ extension ChannelsListViewController: UITableViewDelegate {
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let channel = fetchedResultsController.object(at: indexPath)
+            guard let id = channel.identifier else { return }
+            FirebaseManager().deleteChannel(id: id) { (error) in
+                if error != nil {
+                    DispatchQueue.main.async {
+                        self.presentAlertOnMainThread(title: "AHTUNG",
+                                                      message: "Что-то пошло не так при удалении канала",
+                                                      type: .fail)
+                    }
+                }
+            }
+            CoreDataManager.shared.context.delete(channel)
+            CoreDataManager.shared.saveContext()
         }
     }
 }
@@ -232,10 +242,21 @@ extension ChannelsListViewController: NSFetchedResultsControllerDelegate {
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        case .move:
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .automatic)
-        default:
-            break
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        @unknown default:
+            fatalError()
         }
     }
     

@@ -21,13 +21,15 @@ class ConversationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubviews(tableView, sendView)
+        configTableView()
         configSenderView()
         tableView.backgroundColor = currentTheme.backgroundColor
         getDataFromDB()
+        notifCentre()
     }
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: view.frame, style: .plain)
+        let tableView = UITableView()
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -36,8 +38,18 @@ class ConversationViewController: UIViewController {
         return tableView
     }()
     
+    private func configTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: sendView.topAnchor)
+        ])
+    }
+    
     private lazy var fetchedResultsController: NSFetchedResultsController<MessageDB> = {
-        let context = CoreDataManager.shared.coreDataStack.mainContext
+        let context = CoreDataManager.shared.context
         
         let fetchRequest: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
         let predicate = NSPredicate(format: "channel.identifier == %@", idChannel)
@@ -69,6 +81,7 @@ class ConversationViewController: UIViewController {
                                               message: error.localizedDescription,
                                               type: .fail)
             }
+            self.goToLastCell()
         }
     }
     
@@ -84,6 +97,37 @@ class ConversationViewController: UIViewController {
         ])
     }
     
+    func goToLastCell() {
+        DispatchQueue.main.async {
+            if let messages = self.fetchedResultsController.fetchedObjects?.count, messages > 0 {
+                let indexPath = IndexPath(row: messages - 1, section: 0)
+                self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
+        }
+    }
+    
+    private func notifCentre() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+            as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     @objc private func send() {
         let uuid = Generator().uuid()
         let message = Message(identifier: idChannel,
@@ -94,9 +138,9 @@ class ConversationViewController: UIViewController {
         FirebaseManager().writeMessage(in: idChannel, message: message)
         DispatchQueue.main.async {
             self.sendView.textField.text = ""
-            //            self.messages.append(message)
             self.tableView.reloadData()
         }
+        tableView.reloadData()
     }
     
     private let cellID = String(describing: MessageCell.self)
@@ -124,23 +168,7 @@ extension ConversationViewController: UITableViewDataSource {
         
         return cell
     }
-    //
-    //    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    //        return true
-    //    }
 }
-
-//extension ConversationViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView,
-//                   commit editingStyle: UITableViewCell.EditingStyle,
-//                   forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            messages.remove(at: indexPath.row)
-//                        tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
-//}
 
 // MARK: - NSFetchedResultsControllerDelegate
 
