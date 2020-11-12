@@ -52,10 +52,8 @@ class ConversationViewController: UIViewController {
         let context = CoreDataManager.shared.context
         
         let fetchRequest: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
-        let predicate = NSPredicate(format: "channel.identifier == %@", idChannel)
         let sortByCreated = NSSortDescriptor(key: "created", ascending: true)
         
-        fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [sortByCreated]
         fetchRequest.fetchBatchSize = 32
         
@@ -138,9 +136,7 @@ class ConversationViewController: UIViewController {
         FirebaseManager().writeMessage(in: idChannel, message: message)
         DispatchQueue.main.async {
             self.sendView.textField.text = ""
-            self.tableView.reloadData()
         }
-        tableView.reloadData()
     }
     
     private let cellID = String(describing: MessageCell.self)
@@ -207,6 +203,7 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
         tableView.endUpdates()
     }
 }

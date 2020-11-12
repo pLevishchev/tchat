@@ -88,7 +88,7 @@ class FirebaseManager {
     }
     
     func deleteChannel(id channel: String, complition: @escaping (Error?) -> Void) {
-        channelRef.document(channel).delete() { (error) in
+        channelRef.document(channel).delete { (error) in
             if let error = error {
                 complition(error)
             } else {
