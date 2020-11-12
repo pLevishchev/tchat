@@ -20,7 +20,6 @@ class ChannelsListViewController: UIViewController {
         view.addSubview(tableView)
         //        UINavigationBar.appearance().barTintColor = ThemeService.shared.currentTheme().backgroundColor
         getDataFromDB()
-        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -261,6 +260,7 @@ extension ChannelsListViewController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
         tableView.endUpdates()
     }
 }
