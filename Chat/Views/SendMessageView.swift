@@ -40,7 +40,7 @@ class SendMessageView: UIView {
         
         NSLayoutConstraint.activate([
             self.bottomAnchor.constraint(equalTo: bottomAnchor),
-            self.heightAnchor.constraint(equalToConstant: 100.0)
+            self.heightAnchor.constraint(equalToConstant: 80.0)
         ])
     }
     

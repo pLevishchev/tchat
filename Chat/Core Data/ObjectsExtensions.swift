@@ -18,3 +18,24 @@ extension UserDB {
         self.photo = user.photo?.pngData() ?? nil
     }
 }
+
+extension ChannelDB {
+    convenience init(channel: Channel, in context: NSManagedObjectContext) {
+        self.init(context: context)
+        self.identifier = channel.identifier
+        self.name = channel.name
+        self.lastMessage = channel.lastMessage
+        self.lastActivity = channel.lastActivity
+    }
+}
+
+extension MessageDB {
+    convenience init(message: Message, in context: NSManagedObjectContext) {
+        self.init(context: context)
+        self.identifier = message.identifier
+        self.content = message.content
+        self.created = message.created
+        self.senderId = message.senderId
+        self.senderName = message.senderName
+    }
+}
