@@ -13,7 +13,6 @@ protocol ThemesPickerDelegate: class {
     func didSelectTheme(theme: ThemeModel)
 }
 
-
 class ThemeManager {
     
     static var shared: ThemeManager = {
@@ -50,7 +49,7 @@ class ThemeManager {
                            fontColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
                            theme: "Night")
     
-    private var theme: ThemeModel? = nil
+    private var theme: ThemeModel!
     
     func saveTheme(theme: ThemeModel) {
         userDefaults.setColor(color: theme.backgroundColor, forKey: "backgroundColor")

@@ -56,7 +56,8 @@ extension ThemesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ThemeCell.cellID, for: indexPath) as? ThemeCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ThemeCell.cellID, for: indexPath) as? ThemeCell
+        else {
             return UITableViewCell()
         }
         cell.configure(with: themes[indexPath.row])

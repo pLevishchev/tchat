@@ -11,7 +11,6 @@ import CoreData
 
 protocol ICoreDataContainer {
     var persistentContainer: NSPersistentContainer { get }
-    func saveContext()
 }
 
 class CoreDataContainer: ICoreDataContainer {
@@ -26,16 +25,4 @@ class CoreDataContainer: ICoreDataContainer {
         }
         return container
     }()
-    
-    func saveContext() {
-        let context = persistentContainer.viewContext
-        
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                fatalError()
-            }
-        }
-    }
 }

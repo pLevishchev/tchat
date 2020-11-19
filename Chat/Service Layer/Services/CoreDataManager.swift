@@ -41,11 +41,12 @@ class CoreDataManager: ICoreDataManager {
     }
     
     func saveContext() {
-        do {
-            try context.save()
-            print("Context is saved")
-        } catch {
-            print(error.localizedDescription)
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                fatalError()
+            }
         }
     }
     
