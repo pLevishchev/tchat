@@ -12,19 +12,21 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, ILogger {
     
+    private let rootAssembly = RootAssembly()
     var window: UIWindow?
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         UINavigationBar.appearance().barTintColor = ThemeManager.shared.currentTheme().backgroundColor
-
+        
         if let window = window {
-            let viewController = ChannelsListViewController()
+            let viewController = rootAssembly.presentationAssembly.channelsListViewController()
             window.rootViewController = UINavigationController(rootViewController: viewController)
             window.makeKeyAndVisible()
         }
         FirebaseApp.configure()
+
         return true
     }
     

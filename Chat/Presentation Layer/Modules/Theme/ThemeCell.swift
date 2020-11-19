@@ -16,6 +16,8 @@ class ThemeCell: UITableViewCell, ConfigurableView {
     @IBOutlet weak var rightLabel: UILabel!
     @IBOutlet weak var theme: UILabel!
     
+    static let cellID = String(describing: ThemeCell.self)
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

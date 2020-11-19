@@ -18,6 +18,20 @@ class ConversationViewController: UIViewController {
     
     var idChannel: String = ""
     
+    // Dependencies
+    private let presentationAssembly: IPresentationAssembly
+    private let serviceAssembly: IServicesAssembly
+    
+    init(serviceAssembly: IServicesAssembly, presentationAssembly: IPresentationAssembly) {
+        self.presentationAssembly = presentationAssembly
+        self.serviceAssembly = serviceAssembly
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubviews(tableView, sendView)
@@ -49,7 +63,7 @@ class ConversationViewController: UIViewController {
     }
     
     private lazy var fetchedResultsController: NSFetchedResultsController<MessageDB> = {
-        let context = CoreDataManager.shared.context
+        let context = serviceAssembly.coreDataService.context
         
         let fetchRequest: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
         let sortByCreated = NSSortDescriptor(key: "created", ascending: true)
@@ -72,7 +86,7 @@ class ConversationViewController: UIViewController {
         } catch {
             print("Unable to fetch channel messages: \(error.localizedDescription)")
         }
-        FirebaseManager().fetchMessages(channel: idChannel) {  [weak self] error in
+        serviceAssembly.fireBaseManager.fetchMessages(channel: idChannel) {  [weak self] error in
             guard let self = self else { return }
             if let error = error {
                 self.presentAlertOnMainThread(title: "Не удалось получить список сообщений",
@@ -133,7 +147,7 @@ class ConversationViewController: UIViewController {
                               created: Date(),
                               senderId: uuid,
                               senderName: "test")
-        FirebaseManager().writeMessage(in: idChannel, message: message)
+        serviceAssembly.fireBaseManager.writeMessage(in: idChannel, message: message)
         DispatchQueue.main.async {
             self.sendView.textField.text = ""
         }

@@ -8,7 +8,11 @@
 
 import Foundation
 
-class Generator {
+protocol IGenerator {
+    func uuid() -> String
+}
+
+class Generator: IGenerator {
     
     var userDefaults = UserDefaults.standard
     

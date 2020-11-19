@@ -9,7 +9,12 @@
 import Foundation
 import UIKit
 
-class FileWriterService {
+protocol IFileWriterService {
+    func writeToFile(user: UserModel, vc: IShowAlert)
+    func readFile(viewController: IShowAlert) -> UserModel?
+}
+
+class FileWriterService: IFileWriterService {
     
     lazy var fileManager = FileManager.default
 
@@ -24,7 +29,7 @@ class FileWriterService {
         fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("photo.txt")
     }
     
-    func writeToFile(user: UserModel, viewController: IShowAlert) {
+    func writeToFile(user: UserModel, vc: IShowAlert) {
         do {
             let name = user.name
             let bio = user.bio
@@ -34,7 +39,7 @@ class FileWriterService {
             try name.write(to: fileName, atomically: true, encoding: .utf8)
             try bio.write(to: fileBio, atomically: true, encoding: .utf8)
         } catch {
-            viewController.presentAlertOnMainThread(title: "Ошибка",
+            vc.presentAlertOnMainThread(title: "Ошибка",
                                                     message: "Не удалось сохранить данные",
                                                     type: .fail)
         }

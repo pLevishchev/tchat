@@ -25,7 +25,7 @@ class WriteDataOperation: Operation {
     }
     
     override func main() {
-        FileWriterService().writeToFile(user: user, viewController: viewController)
+        FileWriterService().writeToFile(user: user, vc: viewController)
         result = true
     }
 }

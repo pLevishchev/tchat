@@ -9,7 +9,16 @@
 import Foundation
 import Firebase
 
-class FirebaseManager {
+protocol IFirebaseManager {
+    func fetchChannels(completion: @escaping (Error?) -> Void)
+    func fetchMessages(channel id: String, completion: @escaping (Error?) -> Void)
+    func generateChannelId() -> String
+    func writeChannel(channel: Channel)
+    func deleteChannel(id channel: String, complition: @escaping (Error?) -> Void)
+    func writeMessage(in channel: String, message: Message)
+}
+
+class FirebaseManager: IFirebaseManager {
     
     lazy var db = Firestore.firestore()
     lazy var channelRef = db.collection("channels")
