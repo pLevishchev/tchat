@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol ThemesPickerDelegate: class {
+    func didSelectTheme(theme: ThemeModel)
+}
+
+
 class ThemeManager {
     
     static var shared: ThemeManager = {

@@ -14,11 +14,24 @@ class ChannelsListViewController: UIViewController {
         ThemeManager.shared.currentTheme()
     }
     
+    // Dependencies
+    private let presentationAssembly: IPresentationAssembly
+    private let serviceAssembly: IServicesAssembly
+    
+    init(serviceAssembly: IServicesAssembly, presentationAssembly: IPresentationAssembly) {
+        self.presentationAssembly = presentationAssembly
+        self.serviceAssembly = serviceAssembly
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
         view.addSubview(tableView)
-        //        UINavigationBar.appearance().barTintColor = ThemeService.shared.currentTheme().backgroundColor
         getDataFromDB()
     }
     
@@ -109,14 +122,14 @@ class ChannelsListViewController: UIViewController {
     
     @objc func openProfile() {
         
-        let profileVC = ProfileViewController()
+        let profileVC = presentationAssembly.profileViewController()
         let navController = UINavigationController(rootViewController: profileVC)
         
         present(navController, animated: true, completion: nil)
     }
     
     @objc func openSettings() {
-        let settingsVC = ThemesViewController()
+        let settingsVC = presentationAssembly.themesViewController()
         self.navigationController?.pushViewController(settingsVC, animated: true)
     }
     
@@ -125,12 +138,13 @@ class ChannelsListViewController: UIViewController {
             let ac = UIAlertController(title: "Введите название нового канала", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
                 guard let textFields = ac.textFields else { return }
-                let id = FirebaseManager().generateChannelId()
+                
+                let id = self.serviceAssembly.fireBaseManager.generateChannelId()
                 let channel = Channel(identifier: id,
                                       name: textFields[0].text ?? "Unknown channel",
                                       lastMessage: nil,
                                       lastActivity: nil)
-                FirebaseManager().writeChannel(channel: channel)
+                self.serviceAssembly.fireBaseManager.writeChannel(channel: channel)
                 self.tableView.reloadData()
             }
             
@@ -149,7 +163,7 @@ class ChannelsListViewController: UIViewController {
     }
     
     private lazy var fetchedResultsController: NSFetchedResultsController<ChannelDB> = {
-        let context = CoreDataManager.shared.context
+        let context = serviceAssembly.coreDataService.context
         
         let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
         let sortByCreated = NSSortDescriptor(key: "lastActivity", ascending: false)
@@ -175,8 +189,8 @@ extension ChannelsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-            as? ChannelCell else {
-                return UITableViewCell()
+                as? ChannelCell else {
+            return UITableViewCell()
         }
         
         let channel = fetchedResultsController.object(at: indexPath)
@@ -195,7 +209,7 @@ extension ChannelsListViewController: UITableViewDataSource {
 extension ChannelsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ConversationViewController()
+        let vc = presentationAssembly.conversationViewController()
         vc.navigationItem.title = fetchedResultsController.object(at: indexPath).name
         vc.idChannel = fetchedResultsController.object(at: indexPath).identifier ?? ""
         
@@ -208,7 +222,7 @@ extension ChannelsListViewController: UITableViewDelegate {
         if editingStyle == .delete {
             let channel = fetchedResultsController.object(at: indexPath)
             guard let id = channel.identifier else { return }
-            FirebaseManager().deleteChannel(id: id) { (error) in
+            serviceAssembly.fireBaseManager.deleteChannel(id: id) { (error) in
                 if error != nil {
                     DispatchQueue.main.async {
                         self.presentAlertOnMainThread(title: "AHTUNG",
@@ -217,8 +231,8 @@ extension ChannelsListViewController: UITableViewDelegate {
                     }
                 }
             }
-            CoreDataManager.shared.context.delete(channel)
-            CoreDataManager.shared.saveContext()
+            serviceAssembly.coreDataService.context.delete(channel)
+            serviceAssembly.coreDataService.saveContext()
         }
     }
 }

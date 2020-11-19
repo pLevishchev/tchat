@@ -9,7 +9,12 @@
 import Foundation
 import CoreData
 
-class CoreDataContainer {
+protocol ICoreDataContainer {
+    var persistentContainer: NSPersistentContainer { get }
+    func saveContext()
+}
+
+class CoreDataContainer: ICoreDataContainer {
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Chat")

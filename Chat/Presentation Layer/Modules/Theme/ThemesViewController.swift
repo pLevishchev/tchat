@@ -12,9 +12,22 @@ class ThemesViewController: UIViewController {
     
     private var color = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
     private lazy var heightForHeader = view.frame.height / 10
-    
+    let themes = [ThemeManager.shared.classic, ThemeManager.shared.day, ThemeManager.shared.night]
+
     var currentTheme: ThemeModel {
         ThemeManager.shared.currentTheme()
+    }
+    
+    // Dependencies
+    private let presentationAssembly: IPresentationAssembly
+    
+    init(presentationAssembly: IPresentationAssembly) {
+        self.presentationAssembly = presentationAssembly
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -25,7 +38,7 @@ class ThemesViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
-        tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
+        tableView.register(UINib(nibName: ThemeCell.cellID, bundle: nil), forCellReuseIdentifier: ThemeCell.cellID)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -35,10 +48,6 @@ class ThemesViewController: UIViewController {
         
         return tableView
     }()
-    
-    private let cellID = String(describing: ThemeCell.self)
-    
-    let themes = [ThemeManager.shared.classic, ThemeManager.shared.day, ThemeManager.shared.night]
 }
 
 extension ThemesViewController: UITableViewDataSource {
@@ -47,7 +56,7 @@ extension ThemesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? ThemeCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ThemeCell.cellID, for: indexPath) as? ThemeCell else {
             return UITableViewCell()
         }
         cell.configure(with: themes[indexPath.row])

@@ -11,9 +11,11 @@ import CoreData
 import UIKit
 
 protocol ICoreDataManager {
+    var context: NSManagedObjectContext { get }
     func fetchUser() -> UserModel
     func saveUserToDB(user: UserModel)
     func saveChannelsToDB(channels: [Channel])
+    func saveContext()
 }
 
 class CoreDataManager: ICoreDataManager {
