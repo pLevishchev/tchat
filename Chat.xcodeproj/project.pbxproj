@@ -137,6 +137,7 @@
 			children = (
 				4712EB7A252CC1C9000661CB /* Date+Ext.swift */,
 				3C45DE282540C55200A62C35 /* UIViewController+Ext.swift */,
+				3C6E035A2536D4FA00F3DA56 /* UserDefaults+Ext.swift */,
 				473E023D25188E0E002565FF /* UIView+Ext.swift */,
 				3C23DCC02550862A005D5455 /* Core Data */,
 			);
@@ -149,6 +150,7 @@
 				3CFC6B1825659A5500C56B72 /* Assembly */,
 				3CFC6B172565997600C56B72 /* Services */,
 				4712EB78252CB595000661CB /* Formatter.swift */,
+				47214E302518EA0100BF43C4 /* Constants.swift */,
 			);
 			path = "Service Layer";
 			sourceTree = "<group>";
@@ -220,15 +222,6 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
-		3CBC7AA7252DE189000BBD80 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				3CBC7AA8252DE1AA000BBD80 /* ConfigurableView.swift */,
-				3C45DE392543305B00A62C35 /* SaveDataProtocol.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		3CFC6B172565997600C56B72 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +229,7 @@
 				3C6E0365253CDC9300F3DA56 /* FileWriterService.swift */,
 				3C4BD829254B16D100C515F3 /* FirebaseManager.swift */,
 				3C23DCBC254D8848005D5455 /* Generator.swift */,
+				3C45DE392543305B00A62C35 /* SaveDataProtocol.swift */,
 				3C6E03532534E28B00F3DA56 /* ThemeManager.swift */,
 				47E354932553F7BC00AE197D /* CoreDataManager.swift */,
 				3C6E035F253CDB9600F3DA56 /* GCDDataManager.swift */,
@@ -270,14 +264,6 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
-		47214E2F2518E9E100BF43C4 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				47214E302518EA0100BF43C4 /* Constants.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		473E021925150E44002565FF = {
 			isa = PBXGroup;
 			children = (
@@ -303,9 +289,6 @@
 				3C536F1E256450FD00905DF9 /* Service Layer */,
 				3C536F1D256450D200905DF9 /* Core Layer */,
 				3C536F222564530600905DF9 /* Supporting Files */,
-				3CBC7AA7252DE189000BBD80 /* Protocols */,
-				47214E2F2518E9E100BF43C4 /* Utilities */,
-				473E023C25188DEE002565FF /* Extensions */,
 				473E02392515122B002565FF /* Logger */,
 				3CFC6B1F2565A5E200C56B72 /* RootAssembly.swift */,
 			);
@@ -320,17 +303,10 @@
 			path = Logger;
 			sourceTree = "<group>";
 		};
-		473E023C25188DEE002565FF /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				3C6E035A2536D4FA00F3DA56 /* UserDefaults+Ext.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		473E023F2518BCE0002565FF /* Common Views */ = {
 			isa = PBXGroup;
 			children = (
+				3CBC7AA8252DE1AA000BBD80 /* ConfigurableView.swift */,
 				47214E322519274600BF43C4 /* CustomButton.swift */,
 				3C6E0357253623EE00F3DA56 /* PaddingLabel.swift */,
 				3C4BD854254C8D8400C515F3 /* SendMessageView.swift */,
