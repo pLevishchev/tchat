@@ -13,6 +13,7 @@ protocol IServicesAssembly {
     var fireBaseManager: IFirebaseManager { get }
     var generator: IGenerator { get }
     var coreDataService: ICoreDataManager { get }
+    var saveService: SaveDataProtocol { get }
 
 }
 
@@ -22,5 +23,6 @@ class ServicesAssembly: IServicesAssembly {
     lazy var fireBaseManager: IFirebaseManager = FirebaseManager()
     lazy var generator: IGenerator = Generator()
     lazy var coreDataService: ICoreDataManager = CoreDataManager.shared
+    lazy var saveService: SaveDataProtocol = GCDDataManager()
 
 }

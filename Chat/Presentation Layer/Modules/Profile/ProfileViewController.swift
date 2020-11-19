@@ -188,7 +188,7 @@ class ProfileViewController: UIViewController, ILogger {
     
     @objc func saveDataByGCD() {
         switchOffBorders()
-        saveData(user: fillModelCurrentData(), executor: GCDDataManager())
+        saveData(user: fillModelCurrentData(), executor: serviceAssembly.saveService)
     }
     
     private func switchOffBorders() {
