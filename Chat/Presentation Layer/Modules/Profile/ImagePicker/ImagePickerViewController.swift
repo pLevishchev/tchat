@@ -10,10 +10,8 @@ import UIKit
 
 class ImagePickerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    
     private let spacing: CGFloat = 10.0
     var pickImageCallback: ((UIImage) -> Void)?
-    let coreAssembly = CoreAssembly()
 
     private var activityIndicator = UIActivityIndicatorView(style: .gray)
 
@@ -51,16 +49,15 @@ class ImagePickerViewController: UICollectionViewController, UICollectionViewDel
     }
     
     func getImagesData() {
-        coreAssembly.requestSender.getImagesData { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let images):
-                self.imageData.append(contentsOf: images)
-            case .failure(let error):
-                self.presentAlertOnMainThread(title: "Что-то пошло не так",
-                                              message: error.localizedDescription,
-                                              type: .fail)
+        serviceAssembly.imageNetworkService.imagesData { images, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.presentAlertOnMainThread(title: "Что-то пошло не так",
+                                                  message: error,
+                                                  type: .fail)
+                }
             }
+            self.imageData.append(contentsOf: images ?? [ImageDataModel(largeImageURL: "")])
         }
     }
     
@@ -98,9 +95,8 @@ extension ImagePickerViewController {
             self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
         }
-        
-        coreAssembly.downloadImage.downloadImage(from: imageData[indexPath.item].largeImageURL) { image in
-            guard let newCell = cell as? ImagePickerCollectionViewCell else { fatalError("Wrong cell") }
+        guard let newCell = cell as? ImagePickerCollectionViewCell else { fatalError("Wrong cell") }
+        serviceAssembly.imageNetworkService.downloadImage(from: imageData[indexPath.item].largeImageURL) { image in
             DispatchQueue.main.async {
                 newCell.update(image: image ?? UIImage())
                 self.activityIndicator.isHidden = true
@@ -127,8 +123,7 @@ extension ImagePickerViewController {
     
     override func collectionView(_ collectionView: UICollectionView,
                                  didSelectItemAt indexPath: IndexPath) {
-        coreAssembly.downloadImage.downloadImage(from: imageData[indexPath.item].largeImageURL) { [weak self] image in
-            guard let self = self else { return }
+        serviceAssembly.imageNetworkService.downloadImage(from: imageData[indexPath.item].largeImageURL) { image in
             self.pickImageCallback?(image ?? UIImage())
         }
         self.dismiss(animated: true, completion: nil)

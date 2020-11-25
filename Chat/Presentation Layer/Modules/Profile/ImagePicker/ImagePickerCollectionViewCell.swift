@@ -16,7 +16,7 @@ class ImagePickerCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = .white
+        imageView.image = UIImage(named: "frame")
         clipsToBounds = true
         layer.cornerRadius = 4
     }
