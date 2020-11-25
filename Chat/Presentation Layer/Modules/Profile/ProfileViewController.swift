@@ -70,7 +70,7 @@ class ProfileViewController: UIViewController, ILogger {
         bio.layer.borderWidth = 2
         bio.layer.borderColor = UIColor.gray.cgColor
         
-        bio.text = ""
+        bio.textColor = .gray
     }
     
     private func configNavBar() {
@@ -132,8 +132,8 @@ class ProfileViewController: UIViewController, ILogger {
         executor.saveUser(user: user, viewController: self) {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
-            self.name.isEnabled = false
             self.bio.isEditable = false
+            self.bio.textColor = .black
             self.saveButton.isEnabled = false
             self.saveButton.backgroundColor = .systemGray
             self.presentAlertOnMainThread(title: "Данные сохранены", message: nil, type: .ok)
@@ -211,7 +211,9 @@ class ProfileViewController: UIViewController, ILogger {
     }
     
     @objc func addAvatar() {
-        CameraHandler().pickImage(self) { image in
+        CameraHandler(serviceAssembly: serviceAssembly,
+                      presentationAssembly: presentationAssembly)
+            .pickImage(self) { image in
             self.logo.avatar.image = image
             self.logo.logoName.isHidden = true
         }
@@ -230,7 +232,7 @@ extension ProfileViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if name.text != "" {
             name.layer.borderWidth = 0
-            name.placeholder = ""
+            name.placeholder = name.text
         }
         if bio.text != "" {
             bio.layer.borderWidth = 0

@@ -14,6 +14,8 @@ protocol IPresentationAssembly {
     func conversationViewController() -> ConversationViewController
     func profileViewController() -> ProfileViewController
     func themesViewController() -> ThemesViewController
+    func imagePickerViewController(pickImageCallback: @escaping (UIImage) -> Void) -> ImagePickerViewController
+
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -39,5 +41,14 @@ class PresentationAssembly: IPresentationAssembly {
     
     func themesViewController() -> ThemesViewController {
         return ThemesViewController(presentationAssembly: self)
+    }
+    
+    func imagePickerViewController(pickImageCallback: @escaping (UIImage) -> Void) -> ImagePickerViewController {
+
+        let vc = ImagePickerViewController(presentationAssembly: self, serviceAssembly: serviceAssembly)
+        vc.modalTransitionStyle = .coverVertical
+        vc.pickImageCallback = pickImageCallback
+
+        return vc
     }
 }

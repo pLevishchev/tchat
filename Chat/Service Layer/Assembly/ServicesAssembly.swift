@@ -19,10 +19,15 @@ protocol IServicesAssembly {
 
 class ServicesAssembly: IServicesAssembly {
     
+    private let coreAssembly: ICoreAssembly
+    
+    init(coreAssembly: ICoreAssembly) {
+        self.coreAssembly = coreAssembly
+    }
+    
     lazy var fileWriterService: IFileWriterService = FileWriterService()
     lazy var fireBaseManager: IFirebaseManager = FirebaseManager()
     lazy var generator: IGenerator = Generator()
     lazy var coreDataService: ICoreDataManager = CoreDataManager.shared
     lazy var saveService: SaveDataProtocol = GCDDataManager()
-
 }
