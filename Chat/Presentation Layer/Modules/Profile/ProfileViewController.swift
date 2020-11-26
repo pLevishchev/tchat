@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController, ILogger {
     private var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     private var isEditingMode = false
+    private var isAnimated = false
     
     private lazy var user = serviceAssembly.coreDataService.fetchUser()
     
@@ -71,6 +72,9 @@ class ProfileViewController: UIViewController, ILogger {
         bio.layer.borderColor = UIColor.gray.cgColor
         
         bio.textColor = .gray
+        isAnimated.toggle()
+        isAnimated ? saveButton.shake() : saveButton.shakeOff()
+        
     }
     
     private func configNavBar() {
