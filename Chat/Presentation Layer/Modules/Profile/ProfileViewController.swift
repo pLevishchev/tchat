@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController, ILogger {
     }
     
     @objc func dismissVC() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func startEdit() {

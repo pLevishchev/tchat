@@ -30,6 +30,7 @@
 		3C8BBC51256D8414008C3098 /* ImageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BBC50256D8413008C3098 /* ImageDataModel.swift */; };
 		3C8BBC55256D858B008C3098 /* IImagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BBC54256D858B008C3098 /* IImagesRequest.swift */; };
 		3C8BBC58256D85B0008C3098 /* ImagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BBC57256D85B0008C3098 /* ImagesRequest.swift */; };
+		3C8BBC6525716AF2008C3098 /* AnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BBC6425716AF2008C3098 /* AnimationManager.swift */; };
 		3CBC7A9A252CE0D5000BBD80 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC7A99252CE0D5000BBD80 /* ConversationViewController.swift */; };
 		3CBC7A9D252D8C3D000BBD80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC7A9C252D8C3D000BBD80 /* Message.swift */; };
 		3CBC7AA4252DDF28000BBD80 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBC7AA2252DDF28000BBD80 /* MessageCell.swift */; };
@@ -91,6 +92,7 @@
 		3C8BBC50256D8413008C3098 /* ImageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataModel.swift; sourceTree = "<group>"; };
 		3C8BBC54256D858B008C3098 /* IImagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IImagesRequest.swift; sourceTree = "<group>"; };
 		3C8BBC57256D85B0008C3098 /* ImagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesRequest.swift; sourceTree = "<group>"; };
+		3C8BBC6425716AF2008C3098 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		3CBC7A99252CE0D5000BBD80 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		3CBC7A9C252D8C3D000BBD80 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3CBC7AA2252DDF28000BBD80 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -180,6 +182,8 @@
 		3C536F1F2564510800905DF9 /* Presentation Layer */ = {
 			isa = PBXGroup;
 			children = (
+				3C8BBC6425716AF2008C3098 /* AnimationManager.swift */,
+				3C8BBC5B25716087008C3098 /* Animation */,
 				3CFC6B982566EF0A00C56B72 /* Assembly */,
 				3CFC6B222566DDDD00C56B72 /* Modules */,
 				473E023F2518BCE0002565FF /* Common Views */,
@@ -281,6 +285,13 @@
 				3C8BBC57256D85B0008C3098 /* ImagesRequest.swift */,
 			);
 			path = ImagesRequest;
+			sourceTree = "<group>";
+		};
+		3C8BBC5B25716087008C3098 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		3CFC6B172565997600C56B72 /* Services */ = {
@@ -554,6 +565,7 @@
 				4773EF1D251F9733006CEBC3 /* ChannelCell.swift in Sources */,
 				4773EF18251F7BA6006CEBC3 /* ChannelsListViewController.swift in Sources */,
 				3C8BBC55256D858B008C3098 /* IImagesRequest.swift in Sources */,
+				3C8BBC6525716AF2008C3098 /* AnimationManager.swift in Sources */,
 				3C6E0358253623EE00F3DA56 /* PaddingLabel.swift in Sources */,
 				3C8BBC4C256D7A8B008C3098 /* DownloadImage.swift in Sources */,
 				4712EB7B252CC1C9000661CB /* Date+Ext.swift in Sources */,

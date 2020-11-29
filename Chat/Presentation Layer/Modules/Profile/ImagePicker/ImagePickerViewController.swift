@@ -10,7 +10,7 @@ import UIKit
 
 class ImagePickerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    private let spacing: CGFloat = 10.0
+    private let spacing: CGFloat = 7.0
     var pickImageCallback: ((UIImage) -> Void)?
 
     private var activityIndicator = UIActivityIndicatorView(style: .gray)
