@@ -44,6 +44,7 @@ class ProfileViewController: UIViewController, ILogger {
         super.viewDidLoad()
         log()
         setUpUI()
+        addGests()
     }
     
     @objc func dismissVC() {
@@ -74,7 +75,41 @@ class ProfileViewController: UIViewController, ILogger {
         bio.textColor = .gray
         isAnimated.toggle()
         isAnimated ? saveButton.shake() : saveButton.shakeOff()
+    }
+    
+    func addGests() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
+        let longTap = UILongPressGestureRecognizer(target: self, action: #selector(longTapHandler))
+        tap.cancelsTouchesInView = false
+        longTap.cancelsTouchesInView = false
         
+        tap.numberOfTapsRequired = 1
+        longTap.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(longTap)
+    }
+    
+    @objc func tapHandler(touch: UITapGestureRecognizer) {
+        gestHandler(touch: touch)
+    }
+    
+    @objc func longTapHandler(touch: UILongPressGestureRecognizer) {
+        gestHandler(touch: touch)
+    }
+    
+    func gestHandler(touch: UIGestureRecognizer) {
+        guard touch.view != nil else { return }
+        
+        let touchPoint = touch.location(in: self.view)
+        let dynamicView = UIView(frame: CGRect(x: touchPoint.x, y: touchPoint.y, width: 50, height: 50))
+        dynamicView.layer.cornerRadius = 25
+        self.view.addSubview(dynamicView)
+        TLogoFlakeManager().injectSnowLayer(into: dynamicView)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            dynamicView.removeFromSuperview()
+            TLogoFlakeManager().removeFlake()
+        }
     }
     
     private func configNavBar() {
@@ -218,9 +253,9 @@ class ProfileViewController: UIViewController, ILogger {
         CameraHandler(serviceAssembly: serviceAssembly,
                       presentationAssembly: presentationAssembly)
             .pickImage(self) { image in
-            self.logo.avatar.image = image
-            self.logo.logoName.isHidden = true
-        }
+                self.logo.avatar.image = image
+                self.logo.logoName.isHidden = true
+            }
     }
     
     private func fillModelCurrentData() -> UserModel {
