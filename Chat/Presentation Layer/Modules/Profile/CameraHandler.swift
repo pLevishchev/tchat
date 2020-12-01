@@ -16,8 +16,18 @@ class CameraHandler: NSObject, UIImagePickerControllerDelegate, UINavigationCont
     var viewController: UIViewController?
     var pickImageCallback: ((UIImage) -> Void)?
     
-    override init() {
+    // Dependencies
+    private let presentationAssembly: IPresentationAssembly
+    private let serviceAssembly: IServicesAssembly
+    
+    init(serviceAssembly: IServicesAssembly, presentationAssembly: IPresentationAssembly) {
+        self.presentationAssembly = presentationAssembly
+        self.serviceAssembly = serviceAssembly
         super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func pickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage) -> Void)) {
@@ -30,12 +40,22 @@ class CameraHandler: NSObject, UIImagePickerControllerDelegate, UINavigationCont
         let galleryAction = UIAlertAction(title: "Gallery", style: .default) { _ in
             self.sourceType(source: .photoLibrary)
         }
+        
+        let downloadAction = UIAlertAction(title: "Download", style: .default) { [self] _ in
+            let vc = self.presentationAssembly.imagePickerViewController { image in
+                self.pickImageCallback?(image)
+            }
+            guard let topVC = self.viewController else { fatalError() }
+            topVC.present(vc, animated: true, completion: nil)
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
         }
         
         picker.delegate = self
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
+        alert.addAction(downloadAction)
         alert.addAction(cancelAction)
         
         alert.popoverPresentationController?.sourceView = self.viewController!.view
@@ -48,7 +68,8 @@ class CameraHandler: NSObject, UIImagePickerControllerDelegate, UINavigationCont
             let myPickerController = UIImagePickerController()
             myPickerController.delegate = self
             myPickerController.sourceType = source
-            self.viewController!.present(myPickerController, animated: true, completion: nil)
+            guard let topVC = self.viewController else { fatalError() }
+            topVC.present(myPickerController, animated: true, completion: nil)
         }
     }
     

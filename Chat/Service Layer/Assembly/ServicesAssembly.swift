@@ -14,15 +14,23 @@ protocol IServicesAssembly {
     var generator: IGenerator { get }
     var coreDataService: ICoreDataManager { get }
     var saveService: SaveDataProtocol { get }
+    var imageNetworkService: ImageNetworkService { get }
 
 }
 
 class ServicesAssembly: IServicesAssembly {
+
+    private let coreAssembly: ICoreAssembly
+    
+    init(coreAssembly: ICoreAssembly) {
+        self.coreAssembly = coreAssembly
+    }
     
     lazy var fileWriterService: IFileWriterService = FileWriterService()
     lazy var fireBaseManager: IFirebaseManager = FirebaseManager()
     lazy var generator: IGenerator = Generator()
     lazy var coreDataService: ICoreDataManager = CoreDataManager.shared
     lazy var saveService: SaveDataProtocol = GCDDataManager()
-
+    lazy var imageNetworkService: ImageNetworkService = ImageNetworkService(imageRequest: coreAssembly.requestSender,
+                                                                            download: coreAssembly.downloadImage)
 }

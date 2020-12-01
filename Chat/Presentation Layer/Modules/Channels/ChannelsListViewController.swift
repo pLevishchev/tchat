@@ -30,6 +30,7 @@ class ChannelsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         configureNavBar()
         view.addSubview(tableView)
         getDataFromDB()
@@ -121,11 +122,8 @@ class ChannelsListViewController: UIViewController {
     }
     
     @objc func openProfile() {
-        
         let profileVC = presentationAssembly.profileViewController()
-        let navController = UINavigationController(rootViewController: profileVC)
-        
-        present(navController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(profileVC, animated: true)
     }
     
     @objc func openSettings() {
@@ -276,5 +274,20 @@ extension ChannelsListViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
         tableView.endUpdates()
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+extension ChannelsListViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        switch operation {
+        case .push:
+            return AnimationManager(animationDuration: 1.0, animationType: .present)
+        default:
+            return nil
+        }
     }
 }

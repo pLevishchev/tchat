@@ -6,6 +6,7 @@ target 'Chat' do
   use_frameworks!
 
   # Pods for Chat
+  pod 'SwiftyJSON'
   pod 'SwiftLint'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'

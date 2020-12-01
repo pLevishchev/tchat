@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController, ILogger {
     private var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     private var isEditingMode = false
+    private var isAnimated = false
     
     private lazy var user = serviceAssembly.coreDataService.fetchUser()
     
@@ -43,10 +44,11 @@ class ProfileViewController: UIViewController, ILogger {
         super.viewDidLoad()
         log()
         setUpUI()
+        addGests()
     }
     
     @objc func dismissVC() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func startEdit() {
@@ -70,7 +72,44 @@ class ProfileViewController: UIViewController, ILogger {
         bio.layer.borderWidth = 2
         bio.layer.borderColor = UIColor.gray.cgColor
         
-        bio.text = ""
+        bio.textColor = .gray
+        isAnimated.toggle()
+        isAnimated ? saveButton.shake() : saveButton.shakeOff()
+    }
+    
+    func addGests() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
+        let longTap = UILongPressGestureRecognizer(target: self, action: #selector(longTapHandler))
+        tap.cancelsTouchesInView = false
+        longTap.cancelsTouchesInView = false
+        
+        tap.numberOfTapsRequired = 1
+        longTap.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(longTap)
+    }
+    
+    @objc func tapHandler(touch: UITapGestureRecognizer) {
+        gestHandler(touch: touch)
+    }
+    
+    @objc func longTapHandler(touch: UILongPressGestureRecognizer) {
+        gestHandler(touch: touch)
+    }
+    
+    func gestHandler(touch: UIGestureRecognizer) {
+        guard touch.view != nil else { return }
+        
+        let touchPoint = touch.location(in: self.view)
+        let dynamicView = UIView(frame: CGRect(x: touchPoint.x, y: touchPoint.y, width: 5, height: 5))
+        dynamicView.layer.cornerRadius = 2.5
+        self.view.addSubview(dynamicView)
+        TLogoFlakeManager().injectSnowLayer(into: dynamicView)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            dynamicView.removeFromSuperview()
+            TLogoFlakeManager().removeFlake()
+        }
     }
     
     private func configNavBar() {
@@ -132,8 +171,8 @@ class ProfileViewController: UIViewController, ILogger {
         executor.saveUser(user: user, viewController: self) {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
-            self.name.isEnabled = false
             self.bio.isEditable = false
+            self.bio.textColor = .black
             self.saveButton.isEnabled = false
             self.saveButton.backgroundColor = .systemGray
             self.presentAlertOnMainThread(title: "Данные сохранены", message: nil, type: .ok)
@@ -211,10 +250,12 @@ class ProfileViewController: UIViewController, ILogger {
     }
     
     @objc func addAvatar() {
-        CameraHandler().pickImage(self) { image in
-            self.logo.avatar.image = image
-            self.logo.logoName.isHidden = true
-        }
+        CameraHandler(serviceAssembly: serviceAssembly,
+                      presentationAssembly: presentationAssembly)
+            .pickImage(self) { image in
+                self.logo.avatar.image = image
+                self.logo.logoName.isHidden = true
+            }
     }
     
     private func fillModelCurrentData() -> UserModel {
@@ -230,7 +271,7 @@ extension ProfileViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if name.text != "" {
             name.layer.borderWidth = 0
-            name.placeholder = ""
+            name.placeholder = name.text
         }
         if bio.text != "" {
             bio.layer.borderWidth = 0

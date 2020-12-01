@@ -46,6 +46,7 @@ class ConversationViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(UINib(nibName: cellID, bundle: nil), forCellReuseIdentifier: cellID)
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 120.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .singleLine
         

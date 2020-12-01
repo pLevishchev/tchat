@@ -30,7 +30,7 @@ class Logo: UIView {
     }
     
     private func configView() {
-        let size: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 200 : 240
+        let size: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 160 : 200
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = #colorLiteral(red: 0.8170854449, green: 0.8160859942, blue: 0, alpha: 1)
         layer.cornerRadius = size / 2
@@ -45,6 +45,7 @@ class Logo: UIView {
     private func configureAvatar() {
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.clipsToBounds = true
+        avatar.contentMode = .scaleAspectFill
         
         NSLayoutConstraint.activate([
             avatar.topAnchor.constraint(equalTo: self.topAnchor),
