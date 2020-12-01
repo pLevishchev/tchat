@@ -37,6 +37,6 @@ class MessageCell: UITableViewCell, ConfigurableView {
         message.lineBreakMode = .byWordWrapping
         message.layer.masksToBounds = true
         message.layer.cornerRadius = 10
-        message.padding(5, 5, 10, 8)
+//        message.padding(5, 5, 10, 8)
     }
 }

@@ -6,12 +6,12 @@ class TLogoFlakeManager {
     fileprivate let snowLayer = CAEmitterLayer()
     fileprivate lazy var snowCell: CAEmitterCell = {
         let snowCell = CAEmitterCell()
-        snowCell.contents = UIImage(named: "AppIcon")?.cgImage
-        snowCell.scale = 0.06
+        snowCell.contents = UIImage(named: "logo")?.cgImage
+        snowCell.scale = 0.0002
         snowCell.scaleRange = 0.3
         snowCell.emissionRange = .pi
         snowCell.lifetime = 20.0
-        snowCell.birthRate = 40
+        snowCell.birthRate = 10
         snowCell.velocity = -30
         snowCell.velocityRange = -20
         snowCell.yAcceleration = 30

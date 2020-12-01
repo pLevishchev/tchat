@@ -185,11 +185,11 @@
 			isa = PBXGroup;
 			children = (
 				3C8BBC6425716AF2008C3098 /* AnimationManager.swift */,
+				3C8BBCAE25743101008C3098 /* TLogoFlakeManager.swift */,
 				3C8BBC5B25716087008C3098 /* Animation */,
 				3CFC6B982566EF0A00C56B72 /* Assembly */,
 				3CFC6B222566DDDD00C56B72 /* Modules */,
 				473E023F2518BCE0002565FF /* Common Views */,
-				3C8BBCAE25743101008C3098 /* TLogoFlakeManager.swift */,
 			);
 			path = "Presentation Layer";
 			sourceTree = "<group>";

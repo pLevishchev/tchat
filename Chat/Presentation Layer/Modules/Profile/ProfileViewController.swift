@@ -101,8 +101,8 @@ class ProfileViewController: UIViewController, ILogger {
         guard touch.view != nil else { return }
         
         let touchPoint = touch.location(in: self.view)
-        let dynamicView = UIView(frame: CGRect(x: touchPoint.x, y: touchPoint.y, width: 50, height: 50))
-        dynamicView.layer.cornerRadius = 25
+        let dynamicView = UIView(frame: CGRect(x: touchPoint.x, y: touchPoint.y, width: 5, height: 5))
+        dynamicView.layer.cornerRadius = 2.5
         self.view.addSubview(dynamicView)
         TLogoFlakeManager().injectSnowLayer(into: dynamicView)
         
